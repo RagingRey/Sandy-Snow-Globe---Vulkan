@@ -23,6 +23,10 @@
 #include <optional>
 #include <set>
 
+//Camera and InputHandler
+#include "Camera.h"
+#include "InputHandler.h"
+
 // --- Configuration ---
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -236,6 +240,21 @@ private:
         VkDebugUtilsMessageTypeFlagsEXT messageType,
         const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
         void* pUserData);
+
+
+
+    // --- Camera System ---
+    std::vector<Camera> cameras;
+    int activeCameraIndex = 0;
+    InputHandler inputHandler;
+    float timeScale = 1.0f;
+
+    // Timing
+    float deltaTime = 0.0f;
+    std::chrono::high_resolution_clock::time_point lastFrameTime;
+
+    void initCameras();
+    void setupInputCallbacks();
 };
 
 // --- Implementation ---
@@ -253,6 +272,13 @@ void HelloTriangleApplication::initWindow() {
     window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan 1.3 - Refactored", nullptr, nullptr);
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
+
+    // Initialize camera system
+    initCameras();
+    setupInputCallbacks();
+    inputHandler.setupCallbacks(window);
+
+    lastFrameTime = std::chrono::high_resolution_clock::now();
 }
 
 void HelloTriangleApplication::initVulkan() {
@@ -280,7 +306,13 @@ void HelloTriangleApplication::initVulkan() {
 
 void HelloTriangleApplication::mainLoop() {
     while (!glfwWindowShouldClose(window)) {
+        // Calculate delta time
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        deltaTime = std::chrono::duration<float>(currentTime - lastFrameTime).count();
+        lastFrameTime = currentTime;
+
         glfwPollEvents();
+        inputHandler.processInput(window, deltaTime);
         drawFrame();
     }
     vkDeviceWaitIdle(device);
@@ -971,9 +1003,17 @@ void HelloTriangleApplication::updateUniformBuffer(uint32_t currentImage) {
 
     UniformBufferObject ubo{};
     ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    /*ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
-    ubo.proj[1][1] *= -1;
+    ubo.proj[1][1] *= -1;*/
+
+    // Use active camera's view matrix
+    ubo.view = cameras[activeCameraIndex].getViewMatrix();
+
+    ubo.proj = glm::perspective(glm::radians(45.0f),
+        swapChainExtent.width / static_cast<float>(swapChainExtent.height),
+        0.1f, 1000.0f);  // Increased far plane for globe size
+    ubo.proj[1][1] *= -1;  // Flip Y for Vulkan
 
     memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
 }
@@ -1236,6 +1276,109 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
     return VK_FALSE;
 }
 
+// --- CAMERA SYSTEM ---
+void HelloTriangleApplication::initCameras()
+{
+    // Globe diameter is 200 units (0.2 km), so radius = 100
+    const float globeRadius = 100.0f;
+
+    // C1: Overview camera - positioned to see entire globe
+    cameras.emplace_back(
+        glm::vec3(0.0f, 150.0f, 250.0f),  // Position: above and back
+        glm::vec3(0.0f, 0.0f, 0.0f),       // Target: center of globe
+        glm::vec3(0.0f, 1.0f, 0.0f),       // Up: Y-axis
+        Camera::Type::Overview
+    );
+
+    // C2: Navigation camera - at shadow/particle effect position
+    cameras.emplace_back(
+        glm::vec3(50.0f, 20.0f, 50.0f),   // Position: inside globe
+        glm::vec3(0.0f, 0.0f, 0.0f),       // Target: center
+        glm::vec3(0.0f, 1.0f, 0.0f),
+        Camera::Type::Navigation
+    );
+
+    // C3: Close-up camera - directed at a cactus
+    cameras.emplace_back(
+        glm::vec3(30.0f, 10.0f, 30.0f),   // Position: near ground
+        glm::vec3(20.0f, 5.0f, 20.0f),    // Target: cactus location
+        glm::vec3(0.0f, 1.0f, 0.0f),
+        Camera::Type::CloseUp
+    );
+
+    activeCameraIndex = 0;
+}
+
+void HelloTriangleApplication::setupInputCallbacks()
+{
+    // Exit
+    inputHandler.onExit([this]() {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+        });
+
+    // Reset
+    inputHandler.onReset([this]() {
+        cameras[activeCameraIndex].reset();
+        timeScale = 1.0f;
+        });
+
+    // Camera switching (F1-F3)
+    inputHandler.onCameraSwitch(1, [this]() { activeCameraIndex = 0; });
+    inputHandler.onCameraSwitch(2, [this]() { activeCameraIndex = 1; });
+    inputHandler.onCameraSwitch(3, [this]() { activeCameraIndex = 2; });
+
+    // Particle effect (F4)
+    inputHandler.onParticleEffect([this]() {
+        // TODO: Trigger particle effect (fire on cactus)
+        std::cout << "F4: Particle effect triggered\n";
+        });
+
+    // Time control
+    inputHandler.onTimeDecrease([this]() {
+        timeScale = std::max(0.1f, timeScale - 0.1f);
+        std::cout << "Time scale: " << timeScale << "\n";
+        });
+    inputHandler.onTimeIncrease([this]() {
+        timeScale = std::min(5.0f, timeScale + 0.1f);
+        std::cout << "Time scale: " << timeScale << "\n";
+        });
+
+    // Rotation controls
+    inputHandler.onRotateLeft([this]() {
+        cameras[activeCameraIndex].rotateYaw(-1.0f);  // Negative = camera orbits left
+        });
+    inputHandler.onRotateRight([this]() {
+        cameras[activeCameraIndex].rotateYaw(1.0f);   // Positive = camera orbits right
+        });
+    inputHandler.onRotateUp([this]() {
+        cameras[activeCameraIndex].rotatePitch(-1.0f); // Negative = camera orbits up
+        });
+    inputHandler.onRotateDown([this]() {
+        cameras[activeCameraIndex].rotatePitch(1.0f);  // Positive = camera orbits down
+        });
+
+    // Panning controls
+    inputHandler.onPanLeft([this]() {
+        cameras[activeCameraIndex].panHorizontal(-1.0f);
+        });
+    inputHandler.onPanRight([this]() {
+        cameras[activeCameraIndex].panHorizontal(1.0f);
+        });
+    inputHandler.onPanForward([this]() {
+        cameras[activeCameraIndex].panForward(1.0f);
+        });
+    inputHandler.onPanBackward([this]() {
+        cameras[activeCameraIndex].panForward(-1.0f);
+        });
+    inputHandler.onPanUp([this]() {
+        cameras[activeCameraIndex].panVertical(1.0f);
+        });
+    inputHandler.onPanDown([this]() {
+        cameras[activeCameraIndex].panVertical(-1.0f);
+        });
+}
+
+// --- CAMERA SYSTEM END--
 
 int main() {
     HelloTriangleApplication app;

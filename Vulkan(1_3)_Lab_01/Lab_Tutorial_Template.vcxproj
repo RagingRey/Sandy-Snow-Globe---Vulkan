@@ -160,6 +160,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Lab_Tutorial_Template.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +177,10 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">glslc ".\Shaders\shader.vert" -o ".\Shaders\vert.spv"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Shaders\vert.spv</Outputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="InputHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
