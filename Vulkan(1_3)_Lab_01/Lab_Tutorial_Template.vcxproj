@@ -163,6 +163,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Lab_Tutorial_Template.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Shaders\shader.frag">
@@ -181,6 +183,12 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glsl SHADERS\shader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
