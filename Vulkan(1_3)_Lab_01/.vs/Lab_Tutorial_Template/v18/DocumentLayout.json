@@ -1,54 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\",
+  "WorkspaceRootPath": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Lab_Tutorial_Template.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Shaders\\shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:MeshGenerator.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:MeshGenerator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Shaders\\shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Shaders\\shader.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Shaders\\shader.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Shaders\\shader.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Shaders\\shader.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:OBJLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:OBJLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Vertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Vertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Vertex.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:OBJLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:OBJLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:InputHandler.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:InputHandler.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{855BB1F1-C11F-9561-0EA6-A7583A00AEAB}|Lab_Tutorial_Template.vcxproj|solutionrelative:Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,36 +74,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MeshGenerator.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.cpp",
+              "RelativeDocumentMoniker": "MeshGenerator.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.cpp",
+              "RelativeToolTip": "MeshGenerator.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-26T17:23:56.564Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "MeshGenerator.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.h",
+              "RelativeDocumentMoniker": "MeshGenerator.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\MeshGenerator.h",
+              "RelativeToolTip": "MeshGenerator.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-12-26T17:23:50.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "shader.vert",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.vert",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.vert",
               "RelativeDocumentMoniker": "SHADERS\\shader.vert",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.vert",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.vert",
               "RelativeToolTip": "SHADERS\\shader.vert",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-12-25T21:02:30.367Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "shader.frag",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.frag",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.frag",
               "RelativeDocumentMoniker": "SHADERS\\shader.frag",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.frag",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\SHADERS\\shader.frag",
               "RelativeToolTip": "SHADERS\\shader.frag",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-25T21:02:29.236Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-25T21:02:29.236Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "OBJLoader.cpp",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp",
               "RelativeDocumentMoniker": "OBJLoader.cpp",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.cpp",
               "RelativeToolTip": "OBJLoader.cpp",
               "ViewState": "AgIAAFwAAAAAAAAAAAAwwDsAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -103,11 +134,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "OBJLoader.h",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.h",
               "RelativeDocumentMoniker": "OBJLoader.h",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\OBJLoader.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\OBJLoader.h",
               "RelativeToolTip": "OBJLoader.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -115,11 +146,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Mesh.cpp",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.cpp",
               "RelativeDocumentMoniker": "Mesh.cpp",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.cpp",
               "RelativeToolTip": "Mesh.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -127,11 +158,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Mesh.h",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.h",
               "RelativeDocumentMoniker": "Mesh.h",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Mesh.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Mesh.h",
               "RelativeToolTip": "Mesh.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -139,23 +170,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Vertex.h",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Vertex.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Vertex.h",
               "RelativeDocumentMoniker": "Vertex.h",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Vertex.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Vertex.h",
               "RelativeToolTip": "Vertex.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-12-25T20:01:51.966Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "InputHandler.cpp",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.cpp",
               "RelativeDocumentMoniker": "InputHandler.cpp",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.cpp",
               "RelativeToolTip": "InputHandler.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -163,11 +194,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "InputHandler.h",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.h",
               "RelativeDocumentMoniker": "InputHandler.h",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\InputHandler.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\InputHandler.h",
               "RelativeToolTip": "InputHandler.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -175,11 +206,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "Camera.cpp",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.cpp",
               "RelativeDocumentMoniker": "Camera.cpp",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.cpp",
               "RelativeToolTip": "Camera.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -187,25 +218,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 1,
               "Title": "Camera.h",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.h",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.h",
               "RelativeDocumentMoniker": "Camera.h",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Camera.h",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Camera.h",
               "RelativeToolTip": "Camera.h",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAF4AAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-12-25T15:25:51.78Z"
+              "WhenOpened": "2025-12-25T15:25:51.78Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Lab_Tutorial_Template.cpp",
-              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp",
+              "DocumentMoniker": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp",
               "RelativeDocumentMoniker": "Lab_Tutorial_Template.cpp",
-              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\Sandy-Snow-Globe---Vulkan\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp",
+              "ToolTip": "C:\\Users\\Beyioku Daniel\\Documents\\UOH\\lab-i-final-lab-RagingRey\\Vulkan(1_3)_Lab_01\\Lab_Tutorial_Template.cpp",
               "RelativeToolTip": "Lab_Tutorial_Template.cpp",
-              "ViewState": "AgIAAJwDAAAAAAAAAAAwwL0DAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAgwGgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-12-25T15:21:38.055Z",
               "EditorCaption": ""

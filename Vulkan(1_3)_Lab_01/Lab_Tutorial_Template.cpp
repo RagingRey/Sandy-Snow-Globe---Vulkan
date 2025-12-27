@@ -31,6 +31,7 @@
 #include "Vertex.h"
 #include "Mesh.h"
 #include "OBJLoader.h"
+#include "MeshGenerator.h"
 
 // --- Configuration ---
 const uint32_t WIDTH = 800;
@@ -76,10 +77,11 @@ struct UniformBufferObject {
 };
 
 const std::vector<Vertex> Quad_vertices = {
-    {{-0.5f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}},
-    {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
-    {{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}},
-    {{-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f}}
+    // position              normal                texCoord      color
+    {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}},
+    {{ 0.5f, -0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+    {{ 0.5f,  0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
+    {{-0.5f,  0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}, {1.0f, 1.0f, 1.0f}}
 };
 
 const std::vector<uint32_t> Quad_indices = {
@@ -90,8 +92,44 @@ std::vector<Vertex> vertices;
 std::vector<uint32_t> indices;
 
 void loadModel() {
-    vertices = Quad_vertices;
-    indices = Quad_indices;
+    Mesh globeMesh = MeshGenerator::createSphere(
+        100.0f,                         // radius
+        64,                             // segments
+        32,                             // rings
+        glm::vec3(0.3f, 0.6f, 0.9f)    // light blue color
+    );
+
+    // Generate ground plane (desert floor at Y=0, inside globe)
+    Mesh groundMesh = MeshGenerator::createPlane(
+        180.0f,                         // width (slightly smaller than globe diameter)
+        180.0f,                         // depth
+        16,                             // subdivisions X
+        16,                             // subdivisions Z
+        glm::vec3(0.76f, 0.70f, 0.50f) // sandy/desert color
+    );
+
+    // Combine meshes
+    vertices.clear();
+    indices.clear();
+
+    // Add globe
+    const auto& globeVerts = globeMesh.getVertices();
+    const auto& globeInds = globeMesh.getIndices();
+    vertices.insert(vertices.end(), globeVerts.begin(), globeVerts.end());
+    indices.insert(indices.end(), globeInds.begin(), globeInds.end());
+
+    // Add ground plane (offset indices by globe vertex count)
+    uint32_t indexOffset = static_cast<uint32_t>(globeVerts.size());
+    const auto& groundVerts = groundMesh.getVertices();
+    const auto& groundInds = groundMesh.getIndices();
+
+    vertices.insert(vertices.end(), groundVerts.begin(), groundVerts.end());
+    for (uint32_t idx : groundInds) {
+        indices.push_back(idx + indexOffset);
+    }
+
+    std::cout << "Loaded scene: " << vertices.size() << " vertices, "
+        << indices.size() / 3 << " triangles" << std::endl;
 }
 
 // --- Vulkan Debug Messenger ---
@@ -239,6 +277,24 @@ private:
 
     void initCameras();
     void setupInputCallbacks();
+
+
+
+    // --- Depth Buffer ---
+    VkImage depthImage = VK_NULL_HANDLE;
+    VkDeviceMemory depthImageMemory = VK_NULL_HANDLE;
+    VkImageView depthImageView = VK_NULL_HANDLE;
+
+    // --- Depth Buffer Helpers ---
+    void createDepthResources();
+    VkFormat findDepthFormat();
+    VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates,
+        VkImageTiling tiling,
+        VkFormatFeatureFlags features);
+    void createImage(uint32_t width, uint32_t height, VkFormat format,
+        VkImageTiling tiling, VkImageUsageFlags usage,
+        VkMemoryPropertyFlags properties, VkImage& image,
+        VkDeviceMemory& imageMemory);
 };
 
 // --- Implementation ---
@@ -273,6 +329,7 @@ void HelloTriangleApplication::initVulkan() {
     createLogicalDevice();
     createSwapChain();
     createImageViews();
+    createDepthResources();
     createDescriptorSetLayout();
     createGraphicsPipeline();
     createCommandPool();
@@ -592,7 +649,7 @@ void HelloTriangleApplication::createGraphicsPipeline() {
     inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
     inputAssembly.primitiveRestartEnable = VK_FALSE; 
 
-    VkProvokingVertexModeEXT provokingVertexMode = VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT;
+    //VkProvokingVertexModeEXT provokingVertexMode = VK_PROVOKING_VERTEX_MODE_FIRST_VERTEX_EXT;
 
     VkPipelineViewportStateCreateInfo viewportState{};
     viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
@@ -613,6 +670,16 @@ void HelloTriangleApplication::createGraphicsPipeline() {
     multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
     multisampling.sampleShadingEnable = VK_FALSE;
     multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+	// Depth and Stencil State
+    VkPipelineDepthStencilStateCreateInfo depthStencil{};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = VK_TRUE;
+    depthStencil.depthWriteEnable = VK_TRUE;
+    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
+
 
     VkPipelineColorBlendAttachmentState colorBlendAttachment{};
     colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
@@ -639,10 +706,13 @@ void HelloTriangleApplication::createGraphicsPipeline() {
         throw std::runtime_error("Failed to create pipeline layout!");
     }
 
+    VkFormat depthFormat = findDepthFormat();
+
     VkPipelineRenderingCreateInfo renderingCreateInfo{};
     renderingCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO;
     renderingCreateInfo.colorAttachmentCount = 1;
     renderingCreateInfo.pColorAttachmentFormats = &swapChainImageFormat;
+    renderingCreateInfo.depthAttachmentFormat = depthFormat;
 
     VkGraphicsPipelineCreateInfo pipelineInfo{};
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -659,6 +729,7 @@ void HelloTriangleApplication::createGraphicsPipeline() {
     pipelineInfo.layout = pipelineLayout;
     pipelineInfo.renderPass = VK_NULL_HANDLE;
     pipelineInfo.subpass = 0;
+    pipelineInfo.pDepthStencilState = &depthStencil;
 
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
         throw std::runtime_error("Failed to create graphics pipeline!");
@@ -888,9 +959,14 @@ void HelloTriangleApplication::recreateSwapChain() {
     cleanupSwapChain();
     createSwapChain();
     createImageViews();
+    createDepthResources();
 }
 
 void HelloTriangleApplication::cleanupSwapChain() {
+    vkDestroyImageView(device, depthImageView, nullptr);
+    vkDestroyImage(device, depthImage, nullptr);
+    vkFreeMemory(device, depthImageMemory, nullptr);
+
     for (auto imageView : swapChainImageViews) {
         vkDestroyImageView(device, imageView, nullptr);
     }
@@ -904,6 +980,7 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
         throw std::runtime_error("Failed to begin recording command buffer!");
     }
 
+    // Transition color image
     VkImageMemoryBarrier2 imageBarrierToAttachment{};
     imageBarrierToAttachment.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
     imageBarrierToAttachment.srcStageMask = VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT;
@@ -914,19 +991,42 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     imageBarrierToAttachment.image = swapChainImages[imageIndex];
     imageBarrierToAttachment.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
 
+    // Transition depth image
+    VkImageMemoryBarrier2 depthBarrier{};
+    depthBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
+    depthBarrier.srcStageMask = VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT;
+    depthBarrier.dstStageMask = VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT;
+    depthBarrier.dstAccessMask = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    depthBarrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    depthBarrier.newLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    depthBarrier.image = depthImage;
+    depthBarrier.subresourceRange = { VK_IMAGE_ASPECT_DEPTH_BIT, 0, 1, 0, 1 };
+
+    std::array<VkImageMemoryBarrier2, 2> barriers = { imageBarrierToAttachment, depthBarrier };
+
     VkDependencyInfo dependencyInfoToAttachment{};
     dependencyInfoToAttachment.sType = VK_STRUCTURE_TYPE_DEPENDENCY_INFO;
-    dependencyInfoToAttachment.imageMemoryBarrierCount = 1;
-    dependencyInfoToAttachment.pImageMemoryBarriers = &imageBarrierToAttachment;
+    dependencyInfoToAttachment.imageMemoryBarrierCount = static_cast<uint32_t>(barriers.size());
+    dependencyInfoToAttachment.pImageMemoryBarriers = barriers.data();
     vkCmdPipelineBarrier2(commandBuffer, &dependencyInfoToAttachment);
 
+    // Color attachment
     VkRenderingAttachmentInfo colorAttachment{};
     colorAttachment.sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO;
     colorAttachment.imageView = swapChainImageViews[imageIndex];
     colorAttachment.imageLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
     colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
     colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-    colorAttachment.clearValue.color = { {0.0f, 0.0f, 0.0f, 1.0f} };
+    colorAttachment.clearValue.color = { {0.01f, 0.01f, 0.02f, 1.0f} };  // Dark blue background
+
+    // Depth attachment
+    VkRenderingAttachmentInfo depthAttachment{};
+    depthAttachment.sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO;
+    depthAttachment.imageView = depthImageView;
+    depthAttachment.imageLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    depthAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    depthAttachment.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthAttachment.clearValue.depthStencil = { 1.0f, 0 };
 
     VkRenderingInfo renderingInfo{};
     renderingInfo.sType = VK_STRUCTURE_TYPE_RENDERING_INFO;
@@ -934,6 +1034,7 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     renderingInfo.layerCount = 1;
     renderingInfo.colorAttachmentCount = 1;
     renderingInfo.pColorAttachments = &colorAttachment;
+    renderingInfo.pDepthAttachment = &depthAttachment;  // ADD DEPTH
 
     vkCmdBeginRendering(commandBuffer, &renderingInfo);
 
@@ -944,7 +1045,6 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     viewport.height = static_cast<float>(swapChainExtent.height);
     viewport.maxDepth = 1.0f;
     vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
-
 
     VkRect2D scissor{};
     scissor.extent = swapChainExtent;
@@ -959,6 +1059,7 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 
     vkCmdEndRendering(commandBuffer);
 
+    // Transition for present (only color image)
     VkImageMemoryBarrier2 imageBarrierToPresent{};
     imageBarrierToPresent.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
     imageBarrierToPresent.srcStageMask = VK_PIPELINE_STAGE_2_COLOR_ATTACHMENT_OUTPUT_BIT;
@@ -986,7 +1087,8 @@ void HelloTriangleApplication::updateUniformBuffer(uint32_t currentImage) {
     float time = std::chrono::duration<float>(currentTime - startTime).count();
 
     UniformBufferObject ubo{};
-    ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    ubo.model = glm::mat4(1.0f);
+    //ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     /*ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
     ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
     ubo.proj[1][1] *= -1;*/
@@ -1263,29 +1365,28 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
 // --- CAMERA SYSTEM ---
 void HelloTriangleApplication::initCameras()
 {
-    // Globe diameter is 200 units (0.2 km), so radius = 100
-    const float globeRadius = 100.0f;
+    // Globe diameter is 200 units, radius = 100
 
-    // C1: Overview camera - positioned to see entire globe
+    // C1: Overview camera - see entire globe
     cameras.emplace_back(
-        glm::vec3(0.0f, 150.0f, 250.0f),  // Position: above and back
-        glm::vec3(0.0f, 0.0f, 0.0f),       // Target: center of globe
-        glm::vec3(0.0f, 1.0f, 0.0f),       // Up: Y-axis
+        glm::vec3(0.0f, 100.0f, 300.0f),   // Position: above and back
+        glm::vec3(0.0f, 0.0f, 0.0f),        // Target: center of globe
+        glm::vec3(0.0f, 1.0f, 0.0f),
         Camera::Type::Overview
     );
 
-    // C2: Navigation camera - at shadow/particle effect position
+    // C2: Navigation camera - inside globe view
     cameras.emplace_back(
-        glm::vec3(50.0f, 20.0f, 50.0f),   // Position: inside globe
-        glm::vec3(0.0f, 0.0f, 0.0f),       // Target: center
+        glm::vec3(0.0f, 10.0f, 80.0f),     // Position: inside globe, near edge
+        glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 1.0f, 0.0f),
         Camera::Type::Navigation
     );
 
-    // C3: Close-up camera - directed at a cactus
+    // C3: Close-up camera - at ground level
     cameras.emplace_back(
-        glm::vec3(30.0f, 10.0f, 30.0f),   // Position: near ground
-        glm::vec3(20.0f, 5.0f, 20.0f),    // Target: cactus location
+        glm::vec3(50.0f, 5.0f, 50.0f),     // Position: on ground plane
+        glm::vec3(0.0f, 0.0f, 0.0f),
         glm::vec3(0.0f, 1.0f, 0.0f),
         Camera::Type::CloseUp
     );
@@ -1361,8 +1462,96 @@ void HelloTriangleApplication::setupInputCallbacks()
         cameras[activeCameraIndex].panVertical(-1.0f);
         });
 }
-
 // --- CAMERA SYSTEM END--
+
+// --- DEPTH BUFFERING ---
+void HelloTriangleApplication::createDepthResources() {
+    VkFormat depthFormat = findDepthFormat();
+
+    createImage(swapChainExtent.width, swapChainExtent.height, depthFormat,
+        VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
+        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, depthImage, depthImageMemory);
+
+    // Create image view
+    VkImageViewCreateInfo viewInfo{};
+    viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    viewInfo.image = depthImage;
+    viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    viewInfo.format = depthFormat;
+    viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
+    viewInfo.subresourceRange.baseMipLevel = 0;
+    viewInfo.subresourceRange.levelCount = 1;
+    viewInfo.subresourceRange.baseArrayLayer = 0;
+    viewInfo.subresourceRange.layerCount = 1;
+
+    if (vkCreateImageView(device, &viewInfo, nullptr, &depthImageView) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create depth image view!");
+    }
+}
+
+VkFormat HelloTriangleApplication::findDepthFormat() {
+    return findSupportedFormat(
+        { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
+        VK_IMAGE_TILING_OPTIMAL,
+        VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+    );
+}
+
+VkFormat HelloTriangleApplication::findSupportedFormat(const std::vector<VkFormat>& candidates,
+    VkImageTiling tiling,
+    VkFormatFeatureFlags features) {
+    for (VkFormat format : candidates) {
+        VkFormatProperties props;
+        vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
+
+        if (tiling == VK_IMAGE_TILING_LINEAR && (props.linearTilingFeatures & features) == features) {
+            return format;
+        }
+        else if (tiling == VK_IMAGE_TILING_OPTIMAL && (props.optimalTilingFeatures & features) == features) {
+            return format;
+        }
+    }
+    throw std::runtime_error("Failed to find supported format!");
+}
+
+void HelloTriangleApplication::createImage(uint32_t width, uint32_t height, VkFormat format,
+    VkImageTiling tiling, VkImageUsageFlags usage,
+    VkMemoryPropertyFlags properties, VkImage& image,
+    VkDeviceMemory& imageMemory) {
+    VkImageCreateInfo imageInfo{};
+    imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    imageInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageInfo.extent.width = width;
+    imageInfo.extent.height = height;
+    imageInfo.extent.depth = 1;
+    imageInfo.mipLevels = 1;
+    imageInfo.arrayLayers = 1;
+    imageInfo.format = format;
+    imageInfo.tiling = tiling;
+    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    imageInfo.usage = usage;
+    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+    if (vkCreateImage(device, &imageInfo, nullptr, &image) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create image!");
+    }
+
+    VkMemoryRequirements memRequirements;
+    vkGetImageMemoryRequirements(device, image, &memRequirements);
+
+    VkMemoryAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    allocInfo.allocationSize = memRequirements.size;
+    allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
+
+    if (vkAllocateMemory(device, &allocInfo, nullptr, &imageMemory) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate image memory!");
+    }
+
+    vkBindImageMemory(device, image, imageMemory, 0);
+}
+// --- DEPTH BUFFERING END ---
 
 int main() {
     HelloTriangleApplication app;

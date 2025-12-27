@@ -164,6 +164,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Lab_Tutorial_Template.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshGenerator.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshGenerator.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
