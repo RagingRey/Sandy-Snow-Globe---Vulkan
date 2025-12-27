@@ -116,6 +116,12 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
+    <PreBuildEvent>
+      <Command>glslangValidator -V "$(ProjectDir)SHADERS\shader.vert" -o "$(ProjectDir)shaders\vert.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\shader.frag" -o "$(ProjectDir)shaders\frag.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\gouraud.vert" -o "$(ProjectDir)shaders\gouraud_vert.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders\gouraud_frag.spv"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -160,6 +166,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cactus.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Lab_Tutorial_Template.cpp" />
@@ -182,6 +189,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cactus.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Mesh.h" />
@@ -190,6 +198,8 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="glsl SHADERS\gouraud.frag" />
+    <None Include="glsl SHADERS\gouraud.vert" />
     <None Include="glsl SHADERS\shader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -33,6 +33,9 @@
 #include "OBJLoader.h"
 #include "MeshGenerator.h"
 
+//Cactus
+#include "Cactus.h"
+
 // --- Configuration ---
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -74,6 +77,13 @@ struct UniformBufferObject {
     alignas(16) glm::mat4 model;
     alignas(16) glm::mat4 view;
     alignas(16) glm::mat4 proj;
+
+    alignas(16) glm::vec3 viewPos;      // Camera position for specular
+    alignas(4)  float time;              // For animations
+    alignas(16) glm::vec3 lightPos;      // Light position
+    alignas(4)  float lightIntensity;    // Light brightness
+    alignas(16) glm::vec3 lightColor;    // Light color
+    alignas(4)  float ambientStrength;   // Ambient light level
 };
 
 const std::vector<Vertex> Quad_vertices = {
@@ -108,6 +118,36 @@ void loadModel() {
         glm::vec3(0.76f, 0.70f, 0.50f) // sandy/desert color
     );
 
+    // Generate cacti
+    std::vector<Cactus> cacti;
+
+    // Cactus 1: Tall Saguaro near center
+    Cactus::Config cactus1Config;
+    cactus1Config.position = glm::vec3(20.0f, 0.0f, 15.0f);
+    cactus1Config.height = 12.0f;  // 12 meters tall
+    cactus1Config.trunkRadius = 0.8f;
+    cactus1Config.numArms = 3;
+    cactus1Config.color = glm::vec3(0.15f, 0.5f, 0.15f);
+    cacti.emplace_back(cactus1Config);
+
+    // Cactus 2: Medium cactus
+    Cactus::Config cactus2Config;
+    cactus2Config.position = glm::vec3(-30.0f, 0.0f, -20.0f);
+    cactus2Config.height = 8.0f;
+    cactus2Config.trunkRadius = 0.6f;
+    cactus2Config.numArms = 2;
+    cactus2Config.color = glm::vec3(0.2f, 0.55f, 0.2f);
+    cacti.emplace_back(cactus2Config);
+
+    // Cactus 3: Small young cactus (C3 camera target)
+    Cactus::Config cactus3Config;
+    cactus3Config.position = glm::vec3(40.0f, 0.0f, 40.0f);
+    cactus3Config.height = 4.0f;
+    cactus3Config.trunkRadius = 0.4f;
+    cactus3Config.numArms = 1;
+    cactus3Config.color = glm::vec3(0.25f, 0.6f, 0.25f);
+    cacti.emplace_back(cactus3Config);
+
     // Combine meshes
     vertices.clear();
     indices.clear();
@@ -128,8 +168,24 @@ void loadModel() {
         indices.push_back(idx + indexOffset);
     }
 
+    // Add all cacti
+    for (const auto& cactus : cacti) {
+        Mesh cactusMesh = cactus.generateMesh();
+        indexOffset = static_cast<uint32_t>(vertices.size());
+        const auto& cactusVerts = cactusMesh.getVertices();
+        const auto& cactusInds = cactusMesh.getIndices();
+
+        vertices.insert(vertices.end(), cactusVerts.begin(), cactusVerts.end());
+        for (uint32_t idx : cactusInds) {
+            indices.push_back(idx + indexOffset);
+        }
+    }
+
     std::cout << "Loaded scene: " << vertices.size() << " vertices, "
         << indices.size() / 3 << " triangles" << std::endl;
+    std::cout << "  - Globe: " << globeVerts.size() << " vertices" << std::endl;
+    std::cout << "  - Ground: " << groundVerts.size() << " vertices" << std::endl;
+    std::cout << "  - Cacti: " << cacti.size() << " instances" << std::endl;
 }
 
 // --- Vulkan Debug Messenger ---
@@ -601,7 +657,7 @@ void HelloTriangleApplication::createDescriptorSetLayout() {
     uboLayoutBinding.binding = 0;
     uboLayoutBinding.descriptorCount = 1;
     uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+    uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
 
     VkDescriptorSetLayoutCreateInfo layoutInfo{};
     layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -1100,6 +1156,18 @@ void HelloTriangleApplication::updateUniformBuffer(uint32_t currentImage) {
         swapChainExtent.width / static_cast<float>(swapChainExtent.height),
         0.1f, 1000.0f);  // Increased far plane for globe size
     ubo.proj[1][1] *= -1;  // Flip Y for Vulkan
+
+    // Camera position for specular calculations
+    ubo.viewPos = cameras[activeCameraIndex].getPosition();
+    ubo.time = time;
+
+    // Lighting setup - sun-like light above the scene
+    ubo.lightPos = glm::vec3(100.0f, 200.0f, 100.0f);  // Above and to the side
+    ubo.lightIntensity = 1.0f;
+    ubo.lightColor = glm::vec3(1.0f, 0.95f, 0.9f);     // Warm white (sunlight)
+    ubo.ambientStrength = 0.15f;                        // Low ambient for contrast
+
+    memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
 
     memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
 }
