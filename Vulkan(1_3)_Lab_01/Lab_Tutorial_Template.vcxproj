@@ -173,6 +173,7 @@ glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshGenerator.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Shaders\shader.frag">
@@ -195,6 +196,7 @@ glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshGenerator.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
