@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include "DayNightCycle.h"
 
 /**
  * @brief Manages texture loading and GPU resources

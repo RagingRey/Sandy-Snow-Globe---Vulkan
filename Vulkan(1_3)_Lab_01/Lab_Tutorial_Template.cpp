@@ -43,6 +43,10 @@
 // Texture Manager
 #include "TextureManager.h"
 
+// Day-Night Cycle
+#include "DayNightCycle.h"
+#include "ParticleSystem.h"
+
 // --- Configuration ---
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -365,6 +369,30 @@ private:
 	// --- Texture Manager ---
     TextureManager textureManager;
     int32_t sandTextureIndex = -1;
+
+
+	// Day-Night Cycle
+    DayNightCycle dayNightCycle;
+
+
+
+    // --- Particle System ---
+    ParticleSystem fireParticles;
+    ParticleSystem sandParticles;
+    bool fireActive = false;
+
+    // Particle rendering resources
+    VkPipeline particlePipeline = VK_NULL_HANDLE;
+    VkPipelineLayout particlePipelineLayout = VK_NULL_HANDLE;
+    VkBuffer particleVertexBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory particleVertexBufferMemory = VK_NULL_HANDLE;
+    VkBuffer particleIndexBuffer = VK_NULL_HANDLE;
+    VkDeviceMemory particleIndexBufferMemory = VK_NULL_HANDLE;
+
+    void createParticlePipeline();
+    void initParticleSystems();
+    void updateParticles();
+    void renderParticles(VkCommandBuffer commandBuffer);
 };
 
 // --- Implementation ---
@@ -408,8 +436,10 @@ void HelloTriangleApplication::initVulkan() {
 
     createDescriptorSetLayout();
     createGraphicsPipeline();
+	createParticlePipeline(); // Create particle rendering pipeline
 
     loadModel();
+	initParticleSystems(); //Initialize particle systems
 
     createVertexBuffer();
     createIndexBuffer();
@@ -436,6 +466,15 @@ void HelloTriangleApplication::mainLoop() {
 
 void HelloTriangleApplication::cleanup() {
     cleanupSwapChain();
+
+    
+    // Clean up particle resources
+    vkDestroyBuffer(device, particleVertexBuffer, nullptr);
+    vkFreeMemory(device, particleVertexBufferMemory, nullptr);
+    vkDestroyBuffer(device, particleIndexBuffer, nullptr);
+    vkFreeMemory(device, particleIndexBufferMemory, nullptr);
+    vkDestroyPipeline(device, particlePipeline, nullptr);
+
 
     // Clean up textures
     textureManager.cleanup();
@@ -1000,6 +1039,7 @@ void HelloTriangleApplication::drawFrame() {
     }
 
     updateUniformBuffer(currentFrame);
+    updateParticles();
 
     vkResetFences(device, 1, &inFlightFences[currentFrame]);
     vkResetCommandBuffer(commandBuffers[currentFrame], 0);
@@ -1123,7 +1163,11 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     colorAttachment.imageLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
     colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
     colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-    colorAttachment.clearValue.color = { {0.01f, 0.01f, 0.02f, 1.0f} };  // Dark blue background
+
+    // Dynamic sky color from day/night cycle
+    DayNightCycle::LightState lightState = dayNightCycle.getLightState();
+    colorAttachment.clearValue.color = { {lightState.skyColor.r, lightState.skyColor.g, lightState.skyColor.b, 1.0f} };
+
 
     // Depth attachment
     VkRenderingAttachmentInfo depthAttachment{};
@@ -1163,6 +1207,9 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[currentFrame], 0, nullptr);
     vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
 
+    // Render particles (after main scene, before vkCmdEndRendering)
+    renderParticles(commandBuffer);
+
     vkCmdEndRendering(commandBuffer);
 
     // Transition for present (only color image)
@@ -1188,36 +1235,34 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 }
 
 void HelloTriangleApplication::updateUniformBuffer(uint32_t currentImage) {
-    static auto startTime = std::chrono::high_resolution_clock::now();
-    auto currentTime = std::chrono::high_resolution_clock::now();
-    float time = std::chrono::duration<float>(currentTime - startTime).count();
+    // Update day/night cycle
+    dayNightCycle.update(deltaTime, timeScale);
+    DayNightCycle::LightState lightState = dayNightCycle.getLightState();
 
     UniformBufferObject ubo{};
     ubo.model = glm::mat4(1.0f);
-    //ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    /*ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
-    ubo.proj[1][1] *= -1;*/
 
     // Use active camera's view matrix
     ubo.view = cameras[activeCameraIndex].getViewMatrix();
 
     ubo.proj = glm::perspective(glm::radians(45.0f),
         swapChainExtent.width / static_cast<float>(swapChainExtent.height),
-        0.1f, 1000.0f);  // Increased far plane for globe size
+        0.1f, 1000.0f);
     ubo.proj[1][1] *= -1;  // Flip Y for Vulkan
 
     // Camera position for specular calculations
     ubo.viewPos = cameras[activeCameraIndex].getPosition();
-    ubo.time = time;
 
-    // Lighting setup - sun-like light above the scene
-    ubo.lightPos = glm::vec3(100.0f, 200.0f, 100.0f);  // Above and to the side
-    ubo.lightIntensity = 1.0f;
-    ubo.lightColor = glm::vec3(1.0f, 0.95f, 0.9f);     // Warm white (sunlight)
-    ubo.ambientStrength = 0.15f;                        // Low ambient for contrast
+    // Time for shader animations
+    static auto startTime = std::chrono::high_resolution_clock::now();
+    auto currentTime = std::chrono::high_resolution_clock::now();
+    ubo.time = std::chrono::duration<float>(currentTime - startTime).count();
 
-    memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
+    // Dynamic lighting from day/night cycle
+    ubo.lightPos = lightState.position;
+    ubo.lightIntensity = lightState.intensity;
+    ubo.lightColor = lightState.color;
+    ubo.ambientStrength = lightState.ambientStrength;
 
     memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
 }
@@ -1523,6 +1568,7 @@ void HelloTriangleApplication::setupInputCallbacks()
     inputHandler.onReset([this]() {
         cameras[activeCameraIndex].reset();
         timeScale = 1.0f;
+        dayNightCycle.reset();
         });
 
     // Camera switching (F1-F3)
@@ -1530,10 +1576,19 @@ void HelloTriangleApplication::setupInputCallbacks()
     inputHandler.onCameraSwitch(2, [this]() { activeCameraIndex = 1; });
     inputHandler.onCameraSwitch(3, [this]() { activeCameraIndex = 2; });
 
-    // Particle effect (F4)
+    // Particle fire effect (F4)
     inputHandler.onParticleEffect([this]() {
-        // TODO: Trigger particle effect (fire on cactus)
-        std::cout << "F4: Particle effect triggered\n";
+        fireActive = !fireActive;
+        if (fireActive) {
+            fireParticles.start();
+            std::cout << "F4: Fire effect STARTED on cactus\n";
+            // Switch to camera 3 to see the effect
+            activeCameraIndex = 2;
+        }
+        else {
+            fireParticles.stop();
+            std::cout << "F4: Fire effect STOPPED\n";
+        }
         });
 
     // Time control
@@ -1670,6 +1725,222 @@ void HelloTriangleApplication::createImage(uint32_t width, uint32_t height, VkFo
     vkBindImageMemory(device, image, imageMemory, 0);
 }
 // --- DEPTH BUFFERING END ---
+
+// --- PARTICLE SYSTEM ---
+void HelloTriangleApplication::createParticlePipeline()
+{
+    auto vertShaderCode = readFile("shaders/particle_vert.spv");
+    auto fragShaderCode = readFile("shaders/particle_frag.spv");
+
+    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+
+    VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+    vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+    vertShaderStageInfo.module = vertShaderModule;
+    vertShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+    fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+    fragShaderStageInfo.module = fragShaderModule;
+    fragShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo, fragShaderStageInfo };
+
+    // Particle vertex input
+    auto bindingDescription = ParticleVertex::getBindingDescription();
+    auto attributeDescriptions = ParticleVertex::getAttributeDescriptions();
+
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+    vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+    vertexInputInfo.vertexBindingDescriptionCount = 1;
+    vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+    vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+    vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+
+    VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+    inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+    VkPipelineViewportStateCreateInfo viewportState{};
+    viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+    viewportState.viewportCount = 1;
+    viewportState.scissorCount = 1;
+
+    VkPipelineRasterizationStateCreateInfo rasterizer{};
+    rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+    rasterizer.depthClampEnable = VK_FALSE;
+    rasterizer.rasterizerDiscardEnable = VK_FALSE;
+    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+    rasterizer.lineWidth = 1.0f;
+    rasterizer.cullMode = VK_CULL_MODE_NONE;  // No culling for billboards
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    rasterizer.depthBiasEnable = VK_FALSE;
+
+    VkPipelineMultisampleStateCreateInfo multisampling{};
+    multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+    multisampling.sampleShadingEnable = VK_FALSE;
+    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+    // Depth test but no depth write (particles don't occlude each other)
+    VkPipelineDepthStencilStateCreateInfo depthStencil{};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = VK_TRUE;
+    depthStencil.depthWriteEnable = VK_FALSE;  // KEY: Don't write depth
+    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
+
+    // Additive blending for fire/glow effects
+    VkPipelineColorBlendAttachmentState colorBlendAttachment{};
+    colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT |
+        VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+    colorBlendAttachment.blendEnable = VK_TRUE;
+    colorBlendAttachment.srcColorBlendFactor = VK_BLEND_FACTOR_SRC_ALPHA;
+    colorBlendAttachment.dstColorBlendFactor = VK_BLEND_FACTOR_ONE;  // Additive
+    colorBlendAttachment.colorBlendOp = VK_BLEND_OP_ADD;
+    colorBlendAttachment.srcAlphaBlendFactor = VK_BLEND_FACTOR_ONE;
+    colorBlendAttachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_ZERO;
+    colorBlendAttachment.alphaBlendOp = VK_BLEND_OP_ADD;
+
+    VkPipelineColorBlendStateCreateInfo colorBlending{};
+    colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+    colorBlending.logicOpEnable = VK_FALSE;
+    colorBlending.attachmentCount = 1;
+    colorBlending.pAttachments = &colorBlendAttachment;
+
+    std::vector<VkDynamicState> dynamicStates = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+    VkPipelineDynamicStateCreateInfo dynamicState{};
+    dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+    dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
+    dynamicState.pDynamicStates = dynamicStates.data();
+
+    // Reuse existing pipeline layout (same UBO)
+    VkFormat depthFormat = findDepthFormat();
+
+    VkPipelineRenderingCreateInfo renderingCreateInfo{};
+    renderingCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO;
+    renderingCreateInfo.colorAttachmentCount = 1;
+    renderingCreateInfo.pColorAttachmentFormats = &swapChainImageFormat;
+    renderingCreateInfo.depthAttachmentFormat = depthFormat;
+
+    VkGraphicsPipelineCreateInfo pipelineInfo{};
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    pipelineInfo.pNext = &renderingCreateInfo;
+    pipelineInfo.stageCount = 2;
+    pipelineInfo.pStages = shaderStages;
+    pipelineInfo.pVertexInputState = &vertexInputInfo;
+    pipelineInfo.pInputAssemblyState = &inputAssembly;
+    pipelineInfo.pViewportState = &viewportState;
+    pipelineInfo.pRasterizationState = &rasterizer;
+    pipelineInfo.pMultisampleState = &multisampling;
+    pipelineInfo.pColorBlendState = &colorBlending;
+    pipelineInfo.pDynamicState = &dynamicState;
+    pipelineInfo.pDepthStencilState = &depthStencil;
+    pipelineInfo.layout = pipelineLayout;  // Reuse existing layout
+    pipelineInfo.renderPass = VK_NULL_HANDLE;
+    pipelineInfo.subpass = 0;
+
+    if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &particlePipeline) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create particle pipeline!");
+    }
+
+    vkDestroyShaderModule(device, fragShaderModule, nullptr);
+    vkDestroyShaderModule(device, vertShaderModule, nullptr);
+}
+
+void HelloTriangleApplication::initParticleSystems() {
+    // Fire effect at first cactus position (triggered by F4)
+    fireParticles.init(ParticleSystem::EffectType::Fire, glm::vec3(20.0f, 6.0f, 15.0f));
+    fireParticles.stop();  // Start inactive
+
+    // Ambient sand particles across the desert
+    sandParticles.init(ParticleSystem::EffectType::Sand, glm::vec3(0.0f, 2.0f, 0.0f));
+    sandParticles.start();  // Always active
+
+    // Create particle buffers (dynamic - will be updated each frame)
+    VkDeviceSize vertexBufferSize = sizeof(ParticleVertex) * 4000;  // Max vertices
+    VkDeviceSize indexBufferSize = sizeof(uint32_t) * 6000;         // Max indices
+
+    createBuffer(vertexBufferSize,
+        VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+        particleVertexBuffer, particleVertexBufferMemory);
+
+    createBuffer(indexBufferSize,
+        VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+        VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+        particleIndexBuffer, particleIndexBufferMemory);
+}
+
+void HelloTriangleApplication::updateParticles() {
+    // Update particle physics
+    fireParticles.update(deltaTime * timeScale);
+    sandParticles.update(deltaTime * timeScale);
+
+    // Get camera vectors for billboarding
+    glm::mat4 view = cameras[activeCameraIndex].getViewMatrix();
+    glm::vec3 cameraRight = glm::vec3(view[0][0], view[1][0], view[2][0]);
+    glm::vec3 cameraUp = glm::vec3(view[0][1], view[1][1], view[2][1]);
+
+    // Generate billboard vertices
+    fireParticles.generateVertices(cameraRight, cameraUp);
+    sandParticles.generateVertices(cameraRight, cameraUp);
+
+    // Combine all particle vertices
+    std::vector<ParticleVertex> allVertices;
+    std::vector<uint32_t> allIndices;
+
+    // Add fire particles
+    const auto& fireVerts = fireParticles.getVertices();
+    const auto& fireInds = fireParticles.getIndices();
+    allVertices.insert(allVertices.end(), fireVerts.begin(), fireVerts.end());
+    allIndices.insert(allIndices.end(), fireInds.begin(), fireInds.end());
+
+    // Add sand particles (offset indices)
+    uint32_t indexOffset = static_cast<uint32_t>(fireVerts.size());
+    const auto& sandVerts = sandParticles.getVertices();
+    const auto& sandInds = sandParticles.getIndices();
+    allVertices.insert(allVertices.end(), sandVerts.begin(), sandVerts.end());
+    for (uint32_t idx : sandInds) {
+        allIndices.push_back(idx + indexOffset);
+    }
+
+    // Upload to GPU
+    if (!allVertices.empty()) {
+        void* data;
+        vkMapMemory(device, particleVertexBufferMemory, 0,
+            sizeof(ParticleVertex) * allVertices.size(), 0, &data);
+        memcpy(data, allVertices.data(), sizeof(ParticleVertex) * allVertices.size());
+        vkUnmapMemory(device, particleVertexBufferMemory);
+
+        vkMapMemory(device, particleIndexBufferMemory, 0,
+            sizeof(uint32_t) * allIndices.size(), 0, &data);
+        memcpy(data, allIndices.data(), sizeof(uint32_t) * allIndices.size());
+        vkUnmapMemory(device, particleIndexBufferMemory);
+    }
+}
+
+void HelloTriangleApplication::renderParticles(VkCommandBuffer commandBuffer) {
+    size_t totalIndices = fireParticles.getIndexCount() + sandParticles.getIndexCount();
+    if (totalIndices == 0) return;
+
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, particlePipeline);
+
+    VkBuffer vertexBuffers[] = { particleVertexBuffer };
+    VkDeviceSize offsets[] = { 0 };
+    vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
+    vkCmdBindIndexBuffer(commandBuffer, particleIndexBuffer, 0, VK_INDEX_TYPE_UINT32);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+        pipelineLayout, 0, 1, &descriptorSets[currentFrame], 0, nullptr);
+
+    vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(totalIndices), 1, 0, 0, 0);
+}
+
+// --- PARTICLE SYSTEM END ---
 
 int main() {
     HelloTriangleApplication app;

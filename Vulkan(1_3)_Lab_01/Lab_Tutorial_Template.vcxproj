@@ -120,7 +120,9 @@
       <Command>glslangValidator -V "$(ProjectDir)SHADERS\shader.vert" -o "$(ProjectDir)shaders\vert.spv"
 glslangValidator -V "$(ProjectDir)SHADERS\shader.frag" -o "$(ProjectDir)shaders\frag.spv"
 glslangValidator -V "$(ProjectDir)SHADERS\gouraud.vert" -o "$(ProjectDir)shaders\gouraud_vert.spv"
-glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders\gouraud_frag.spv"</Command>
+glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders\gouraud_frag.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\particle.vert" -o "$(ProjectDir)shaders\particle_vert.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shaders\particle_frag.spv"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -192,16 +194,21 @@ glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders
   <ItemGroup>
     <ClInclude Include="Cactus.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DayNightCycle.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshGenerator.h" />
     <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glsl SHADERS\gouraud.frag" />
     <None Include="glsl SHADERS\gouraud.vert" />
+    <None Include="glsl SHADERS\particle.frag" />
+    <None Include="glsl SHADERS\particle.vert" />
     <None Include="glsl SHADERS\shader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
