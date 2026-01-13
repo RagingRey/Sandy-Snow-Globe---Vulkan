@@ -21,7 +21,7 @@
  * OBJ Format Reference: http://www.fileformat.info/format/wavefrontobj/
  * Supported elements: v, vt, vn, f
  */
-class OBJLoader {
+class OBJLoader final{
 public:
     // Prevent instantiation - utility class
     OBJLoader() = delete;

@@ -111,7 +111,7 @@ Mesh OBJLoader::load(const std::string& filepath) {
     Mesh mesh(std::move(vertices), std::move(indices));
 
     // Calculate normals if none were provided
-    bool hasNormals = !normals.empty();
+    const bool hasNormals = !normals.empty();
     if (!hasNormals) {
         mesh.recalculateNormals();
     }
@@ -124,7 +124,7 @@ Mesh OBJLoader::load(const std::string& filepath) {
 }
 
 bool OBJLoader::fileExists(const std::string& filepath) {
-    std::ifstream file(filepath);
+    const std::ifstream file(filepath);
     return file.good();
 }
 
@@ -158,10 +158,10 @@ std::vector<std::string> OBJLoader::split(const std::string& str, char delimiter
 
 std::string OBJLoader::trim(const std::string& str) {
     const char* whitespace = " \t\r\n";
-    size_t start = str.find_first_not_of(whitespace);
+    const size_t start = str.find_first_not_of(whitespace);
     if (start == std::string::npos) {
         return "";
     }
-    size_t end = str.find_last_not_of(whitespace);
+    const size_t end = str.find_last_not_of(whitespace);
     return str.substr(start, end - start + 1);
 }

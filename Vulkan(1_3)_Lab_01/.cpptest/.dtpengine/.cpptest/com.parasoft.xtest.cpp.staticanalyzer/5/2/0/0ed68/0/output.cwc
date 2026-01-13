@@ -1,0 +1,260 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>OPT-14
+<b>The parameter 'vertices' of function 'Mesh' is passed by value
+<l>5
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>OPT-14
+<b>The parameter 'indices' of function 'Mesh' is passed by value
+<l>5
+<k>64
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>OPT-14
+<b>The parameter 'vertices' of function 'setVertices' is passed by value
+<l>12
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>OPT-14
+<b>The parameter 'indices' of function 'setIndices' is passed by value
+<l>17
+<k>45
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'i0' as const
+<l>45
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'i1' as const
+<l>46
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'i2' as const
+<l>47
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'v0' as const
+<l>49
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'v1' as const
+<l>50
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'v2' as const
+<l>51
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'edge1' as const
+<l>53
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'edge2' as const
+<l>54
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'faceNormal' as const
+<l>55
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'length' as const
+<l>64
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMinBounds' is passed by value
+<l>33
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMaxBounds' is passed by value
+<l>34
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-MCPP-23
+<b>Class 'Mesh' should be final
+<l>21
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getVertices' returns handles to member data: 'm_vertices'
+<l>27
+<k>54
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getIndices' returns handles to member data: 'm_indices'
+<l>28
+<k>55
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getBindingDescription' is passed by value
+<l>31
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getAttributeDescriptions' is passed by value
+<l>39
+<k>61
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-95
+<b>The 'std' namespace should not be modified
+<l>71
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h1' as const
+<l>74
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h2' as const
+<l>75
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h3' as const
+<l>76
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h4' as const
+<l>77
+<k>20
+<s>false
+<N>
+<f>
+<L>0

@@ -1,0 +1,230 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>OPT-03
+<b>Parameter 'deltaTime' is not used
+<l>45
+<k>59
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>OPT-14
+<b>The parameter 'callback' of function 'onCameraSwitch' is passed by value
+<l>96
+<k>64
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'handler' as const
+<l>9
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'ctrlHeld' as const
+<l>46
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'key' as const
+<l>97
+<k>9
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onExit' is passed by value
+<l>24
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onReset' is passed by value
+<l>25
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onParticleEffect' is passed by value
+<l>27
+<k>39
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onShaderSwitch' is passed by value
+<l>29
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onTimeDecrease' is passed by value
+<l>30
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onTimeIncrease' is passed by value
+<l>31
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onRotateLeft' is passed by value
+<l>34
+<k>35
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onRotateRight' is passed by value
+<l>35
+<k>36
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onRotateUp' is passed by value
+<l>36
+<k>33
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onRotateDown' is passed by value
+<l>37
+<k>35
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanLeft' is passed by value
+<l>38
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanRight' is passed by value
+<l>39
+<k>33
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanForward' is passed by value
+<l>40
+<k>35
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanBackward' is passed by value
+<l>41
+<k>36
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanUp' is passed by value
+<l>42
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>OPT-14
+<b>The parameter 'callback' of function 'onPanDown' is passed by value
+<l>43
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'processInput' should be declared as const
+<l>45
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\InputHandler.h
+<c>CODSTA-MCPP-23
+<b>Class 'InputHandler' should be final
+<l>15
+<k>7
+<s>false
+<N>
+<f>
+<L>0

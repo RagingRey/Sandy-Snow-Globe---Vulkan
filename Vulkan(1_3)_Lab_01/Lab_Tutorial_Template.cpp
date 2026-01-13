@@ -47,6 +47,9 @@
 #include "DayNightCycle.h"
 #include "ParticleSystem.h"
 
+// Add include at top
+#include "ConfigLoader.h"
+
 // --- Configuration ---
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -88,6 +91,7 @@ struct UniformBufferObject {
     alignas(16) glm::mat4 model;
     alignas(16) glm::mat4 view;
     alignas(16) glm::mat4 proj;
+    alignas(16) glm::mat4 lightSpaceMatrix;  // NEW: For shadow mapping
 
     alignas(16) glm::vec3 viewPos;      // Camera position for specular
     alignas(4)  float time;              // For animations
@@ -95,6 +99,11 @@ struct UniformBufferObject {
     alignas(4)  float lightIntensity;    // Light brightness
     alignas(16) glm::vec3 lightColor;    // Light color
     alignas(4)  float ambientStrength;   // Ambient light level
+};
+
+struct ShadowUBO {
+    alignas(16) glm::mat4 lightSpaceMatrix;
+    alignas(16) glm::mat4 model;
 };
 
 const std::vector<Vertex> Quad_vertices = {
@@ -111,55 +120,27 @@ const std::vector<uint32_t> Quad_indices = {
 
 std::vector<Vertex> vertices;
 std::vector<uint32_t> indices;
+// --- Configuration Loader ---
+ConfigLoader::SceneConfig sceneConfig;
 
 void loadModel() {
+    sceneConfig = ConfigLoader::load("txt scene.cfg");
+
     Mesh globeMesh = MeshGenerator::createSphere(
-        100.0f,                         // radius
-        64,                             // segments
-        32,                             // rings
-        glm::vec3(0.3f, 0.6f, 0.9f)    // light blue color
+        100.0f, 64, 32, glm::vec3(0.3f, 0.6f, 0.9f)
     );
 
-    // Generate ground plane (desert floor at Y=0, inside globe)
     Mesh groundMesh = MeshGenerator::createPlane(
-        180.0f,                         // width (slightly smaller than globe diameter)
-        180.0f,                         // depth
-        16,                             // subdivisions X
-        16,                             // subdivisions Z
-        glm::vec3(0.76f, 0.70f, 0.50f) // sandy/desert color
+        180.0f, 180.0f, 16, 16, glm::vec3(0.76f, 0.70f, 0.50f)
     );
 
-    // Generate cacti
+    // Build cacti from config
     std::vector<Cactus> cacti;
+    for (const auto& cactusConfig : sceneConfig.cacti) {
+        cacti.emplace_back(cactusConfig);
+    }
 
-    // Cactus 1: Tall Saguaro near center
-    Cactus::Config cactus1Config;
-    cactus1Config.position = glm::vec3(20.0f, 0.0f, 15.0f);
-    cactus1Config.height = 12.0f;  // 12 meters tall
-    cactus1Config.trunkRadius = 0.8f;
-    cactus1Config.numArms = 3;
-    cactus1Config.color = glm::vec3(0.15f, 0.5f, 0.15f);
-    cacti.emplace_back(cactus1Config);
-
-    // Cactus 2: Medium cactus
-    Cactus::Config cactus2Config;
-    cactus2Config.position = glm::vec3(-30.0f, 0.0f, -20.0f);
-    cactus2Config.height = 8.0f;
-    cactus2Config.trunkRadius = 0.6f;
-    cactus2Config.numArms = 2;
-    cactus2Config.color = glm::vec3(0.2f, 0.55f, 0.2f);
-    cacti.emplace_back(cactus2Config);
-
-    // Cactus 3: Small young cactus (C3 camera target)
-    Cactus::Config cactus3Config;
-    cactus3Config.position = glm::vec3(40.0f, 0.0f, 40.0f);
-    cactus3Config.height = 4.0f;
-    cactus3Config.trunkRadius = 0.4f;
-    cactus3Config.numArms = 1;
-    cactus3Config.color = glm::vec3(0.25f, 0.6f, 0.25f);
-    cacti.emplace_back(cactus3Config);
-
-    // Combine meshes
+    // Combine meshes (rest remains the same)
     vertices.clear();
     indices.clear();
 
@@ -169,17 +150,16 @@ void loadModel() {
     vertices.insert(vertices.end(), globeVerts.begin(), globeVerts.end());
     indices.insert(indices.end(), globeInds.begin(), globeInds.end());
 
-    // Add ground plane (offset indices by globe vertex count)
+    // Add ground plane
     uint32_t indexOffset = static_cast<uint32_t>(globeVerts.size());
     const auto& groundVerts = groundMesh.getVertices();
     const auto& groundInds = groundMesh.getIndices();
-
     vertices.insert(vertices.end(), groundVerts.begin(), groundVerts.end());
     for (uint32_t idx : groundInds) {
         indices.push_back(idx + indexOffset);
     }
 
-    // Add all cacti
+    // Add all cacti from config
     for (const auto& cactus : cacti) {
         Mesh cactusMesh = cactus.generateMesh();
         indexOffset = static_cast<uint32_t>(vertices.size());
@@ -194,9 +174,7 @@ void loadModel() {
 
     std::cout << "Loaded scene: " << vertices.size() << " vertices, "
         << indices.size() / 3 << " triangles" << std::endl;
-    std::cout << "  - Globe: " << globeVerts.size() << " vertices" << std::endl;
-    std::cout << "  - Ground: " << groundVerts.size() << " vertices" << std::endl;
-    std::cout << "  - Cacti: " << cacti.size() << " instances" << std::endl;
+    std::cout << "  - Cacti: " << cacti.size() << " from config" << std::endl;
 }
 
 // --- Vulkan Debug Messenger ---
@@ -393,6 +371,40 @@ private:
     void initParticleSystems();
     void updateParticles();
     void renderParticles(VkCommandBuffer commandBuffer);
+
+
+    // --- Shadow Mapping ---
+    static const uint32_t SHADOW_MAP_SIZE = 2048;
+
+    VkImage shadowMapImage = VK_NULL_HANDLE;
+    VkDeviceMemory shadowMapMemory = VK_NULL_HANDLE;
+    VkImageView shadowMapImageView = VK_NULL_HANDLE;
+    VkSampler shadowMapSampler = VK_NULL_HANDLE;
+
+    VkPipeline shadowPipeline = VK_NULL_HANDLE;
+    VkPipelineLayout shadowPipelineLayout = VK_NULL_HANDLE;
+    VkDescriptorSetLayout shadowDescriptorSetLayout = VK_NULL_HANDLE;
+    VkDescriptorPool shadowDescriptorPool = VK_NULL_HANDLE;
+    std::vector<VkDescriptorSet> shadowDescriptorSets;
+
+    // Shadow uniform buffers
+    std::vector<VkBuffer> shadowUniformBuffers;
+    std::vector<VkDeviceMemory> shadowUniformBuffersMemory;
+    std::vector<void*> shadowUniformBuffersMapped;
+
+    glm::mat4 lightSpaceMatrix = glm::mat4(1.0f);
+
+    void createShadowMapResources();
+    void createShadowPipeline();
+    void updateLightSpaceMatrix();
+    void renderShadowPass(VkCommandBuffer commandBuffer);
+
+
+    // --- Shader Switching ---
+    VkPipeline gouraudPipeline = VK_NULL_HANDLE;
+    bool usePhongShading = true;  // true = Phong, false = Gouraud
+
+    void createGouraudPipeline();
 };
 
 // --- Implementation ---
@@ -434,11 +446,18 @@ void HelloTriangleApplication::initVulkan() {
     textureManager.init(device, physicalDevice, commandPool, graphicsQueue);
     sandTextureIndex = textureManager.generateSandTexture(512, 512);
 
+    createShadowMapResources(); 
     createDescriptorSetLayout();
     createGraphicsPipeline();
+	createGouraudPipeline();// Create Gouraud shading pipeline
+	createShadowPipeline(); // Create shadow mapping pipeline
 	createParticlePipeline(); // Create particle rendering pipeline
 
     loadModel();
+
+    // Apply day/night cycle settings from config
+    dayNightCycle.setCycleDuration(sceneConfig.dayLengthSeconds + sceneConfig.nightLengthSeconds);
+
 	initParticleSystems(); //Initialize particle systems
 
     createVertexBuffer();
@@ -467,19 +486,25 @@ void HelloTriangleApplication::mainLoop() {
 void HelloTriangleApplication::cleanup() {
     cleanupSwapChain();
 
-    
-    // Clean up particle resources
-    vkDestroyBuffer(device, particleVertexBuffer, nullptr);
-    vkFreeMemory(device, particleVertexBufferMemory, nullptr);
-    vkDestroyBuffer(device, particleIndexBuffer, nullptr);
-    vkFreeMemory(device, particleIndexBufferMemory, nullptr);
-    vkDestroyPipeline(device, particlePipeline, nullptr);
+    // Clean up shadow resources
+    vkDestroySampler(device, shadowMapSampler, nullptr);
+    vkDestroyImageView(device, shadowMapImageView, nullptr);
+    vkDestroyImage(device, shadowMapImage, nullptr);
+    vkFreeMemory(device, shadowMapMemory, nullptr);
+    vkDestroyPipeline(device, shadowPipeline, nullptr);
+    vkDestroyPipelineLayout(device, shadowPipelineLayout, nullptr);
+    vkDestroyDescriptorSetLayout(device, shadowDescriptorSetLayout, nullptr);
 
+    for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
+        vkDestroyBuffer(device, shadowUniformBuffers[i], nullptr);
+        vkFreeMemory(device, shadowUniformBuffersMemory[i], nullptr);
+    }
 
     // Clean up textures
     textureManager.cleanup();
 
     vkDestroyPipeline(device, graphicsPipeline, nullptr);
+    vkDestroyPipeline(device, gouraudPipeline, nullptr);
     vkDestroyPipelineLayout(device, pipelineLayout, nullptr);
     vkDestroyDescriptorSetLayout(device, descriptorSetLayout, nullptr);
 
@@ -577,9 +602,9 @@ void HelloTriangleApplication::pickPhysicalDevice() {
     std::vector<VkPhysicalDevice> devices(deviceCount);
     vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
-    for (const auto& device : devices) {
-        if (isDeviceSuitable(device)) {
-            physicalDevice = device;
+    for (const auto& dev : devices) {
+        if (isDeviceSuitable(dev)) {
+            physicalDevice = dev;
             break;
         }
     }
@@ -729,8 +754,16 @@ void HelloTriangleApplication::createDescriptorSetLayout() {
     samplerLayoutBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
     samplerLayoutBinding.pImmutableSamplers = nullptr;
 
-    std::array<VkDescriptorSetLayoutBinding, 2> bindings = {
-        uboLayoutBinding, samplerLayoutBinding
+    // Binding 2: Shadow map sampler (NEW)
+    VkDescriptorSetLayoutBinding shadowMapBinding{};
+    shadowMapBinding.binding = 2;
+    shadowMapBinding.descriptorCount = 1;
+    shadowMapBinding.descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+    shadowMapBinding.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    shadowMapBinding.pImmutableSamplers = nullptr;
+
+    std::array<VkDescriptorSetLayoutBinding, 3> bindings = {
+        uboLayoutBinding, samplerLayoutBinding, shadowMapBinding
     };
 
     VkDescriptorSetLayoutCreateInfo layoutInfo{};
@@ -740,6 +773,22 @@ void HelloTriangleApplication::createDescriptorSetLayout() {
 
     if (vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSetLayout) != VK_SUCCESS) {
         throw std::runtime_error("Failed to create descriptor set layout!");
+    }
+
+    // Create shadow descriptor set layout (simpler - only UBO)
+    VkDescriptorSetLayoutBinding shadowUboBinding{};
+    shadowUboBinding.binding = 0;
+    shadowUboBinding.descriptorCount = 1;
+    shadowUboBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+    shadowUboBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+
+    VkDescriptorSetLayoutCreateInfo shadowLayoutInfo{};
+    shadowLayoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+    shadowLayoutInfo.bindingCount = 1;
+    shadowLayoutInfo.pBindings = &shadowUboBinding;
+
+    if (vkCreateDescriptorSetLayout(device, &shadowLayoutInfo, nullptr, &shadowDescriptorSetLayout) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow descriptor set layout!");
     }
 }
 
@@ -932,16 +981,16 @@ void HelloTriangleApplication::createDescriptorPool() {
     std::array<VkDescriptorPoolSize, 2> poolSizes{};
 
     poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    poolSizes[0].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
+    poolSizes[0].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT) * 2;  // Main + Shadow
 
     poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    poolSizes[1].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
+    poolSizes[1].descriptorCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT) * 2;  // Texture + Shadow map
 
     VkDescriptorPoolCreateInfo poolInfo{};
     poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
     poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
     poolInfo.pPoolSizes = poolSizes.data();
-    poolInfo.maxSets = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
+    poolInfo.maxSets = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT) * 2;  // Main + Shadow sets
 
     if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool) != VK_SUCCESS) {
         throw std::runtime_error("Failed to create descriptor pool!");
@@ -949,6 +998,7 @@ void HelloTriangleApplication::createDescriptorPool() {
 }
 
 void HelloTriangleApplication::createDescriptorSets() {
+    // Main descriptor sets
     std::vector<VkDescriptorSetLayout> layouts(MAX_FRAMES_IN_FLIGHT, descriptorSetLayout);
     VkDescriptorSetAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
@@ -961,15 +1011,36 @@ void HelloTriangleApplication::createDescriptorSets() {
         throw std::runtime_error("Failed to allocate descriptor sets!");
     }
 
+    // Shadow descriptor sets
+    std::vector<VkDescriptorSetLayout> shadowLayouts(MAX_FRAMES_IN_FLIGHT, shadowDescriptorSetLayout);
+    VkDescriptorSetAllocateInfo shadowAllocInfo{};
+    shadowAllocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    shadowAllocInfo.descriptorPool = descriptorPool;
+    shadowAllocInfo.descriptorSetCount = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
+    shadowAllocInfo.pSetLayouts = shadowLayouts.data();
+
+    shadowDescriptorSets.resize(MAX_FRAMES_IN_FLIGHT);
+    if (vkAllocateDescriptorSets(device, &shadowAllocInfo, shadowDescriptorSets.data()) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate shadow descriptor sets!");
+    }
+
     for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
+        // Main UBO
         VkDescriptorBufferInfo bufferInfo{};
         bufferInfo.buffer = uniformBuffers[i];
         bufferInfo.offset = 0;
         bufferInfo.range = sizeof(UniformBufferObject);
 
-        VkDescriptorImageInfo imageInfo = textureManager.getDescriptorInfo(sandTextureIndex);
+        // Sand texture
+        VkDescriptorImageInfo textureInfo = textureManager.getDescriptorInfo(sandTextureIndex);
 
-        std::array<VkWriteDescriptorSet, 2> descriptorWrites{};
+        // Shadow map
+        VkDescriptorImageInfo shadowMapInfo{};
+        shadowMapInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+        shadowMapInfo.imageView = shadowMapImageView;
+        shadowMapInfo.sampler = shadowMapSampler;
+
+        std::array<VkWriteDescriptorSet, 3> descriptorWrites{};
 
         descriptorWrites[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
         descriptorWrites[0].dstSet = descriptorSets[i];
@@ -983,10 +1054,33 @@ void HelloTriangleApplication::createDescriptorSets() {
         descriptorWrites[1].dstBinding = 1;
         descriptorWrites[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
         descriptorWrites[1].descriptorCount = 1;
-        descriptorWrites[1].pImageInfo = &imageInfo;
+        descriptorWrites[1].pImageInfo = &textureInfo;
+
+        descriptorWrites[2].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        descriptorWrites[2].dstSet = descriptorSets[i];
+        descriptorWrites[2].dstBinding = 2;
+        descriptorWrites[2].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        descriptorWrites[2].descriptorCount = 1;
+        descriptorWrites[2].pImageInfo = &shadowMapInfo;
 
         vkUpdateDescriptorSets(device, static_cast<uint32_t>(descriptorWrites.size()),
             descriptorWrites.data(), 0, nullptr);
+
+        // Shadow UBO
+        VkDescriptorBufferInfo shadowBufferInfo{};
+        shadowBufferInfo.buffer = shadowUniformBuffers[i];
+        shadowBufferInfo.offset = 0;
+        shadowBufferInfo.range = sizeof(ShadowUBO);
+
+        VkWriteDescriptorSet shadowWrite{};
+        shadowWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        shadowWrite.dstSet = shadowDescriptorSets[i];
+        shadowWrite.dstBinding = 0;
+        shadowWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        shadowWrite.descriptorCount = 1;
+        shadowWrite.pBufferInfo = &shadowBufferInfo;
+
+        vkUpdateDescriptorSets(device, 1, &shadowWrite, 0, nullptr);
     }
 }
 
@@ -1126,6 +1220,9 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
         throw std::runtime_error("Failed to begin recording command buffer!");
     }
 
+    // ===== SHADOW PASS =====
+    renderShadowPass(commandBuffer);
+
     // Transition color image
     VkImageMemoryBarrier2 imageBarrierToAttachment{};
     imageBarrierToAttachment.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
@@ -1188,7 +1285,9 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 
     vkCmdBeginRendering(commandBuffer, &renderingInfo);
 
-    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+    // Use Phong or Gouraud pipeline based on toggle
+    VkPipeline activePipeline = usePhongShading ? graphicsPipeline : gouraudPipeline;
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, activePipeline);
 
     VkViewport viewport{};
     viewport.width = static_cast<float>(swapChainExtent.width);
@@ -1239,32 +1338,37 @@ void HelloTriangleApplication::updateUniformBuffer(uint32_t currentImage) {
     dayNightCycle.update(deltaTime, timeScale);
     DayNightCycle::LightState lightState = dayNightCycle.getLightState();
 
+    // Update light space matrix for shadows
+    updateLightSpaceMatrix();
+
     UniformBufferObject ubo{};
     ubo.model = glm::mat4(1.0f);
-
-    // Use active camera's view matrix
     ubo.view = cameras[activeCameraIndex].getViewMatrix();
-
     ubo.proj = glm::perspective(glm::radians(45.0f),
         swapChainExtent.width / static_cast<float>(swapChainExtent.height),
         0.1f, 1000.0f);
-    ubo.proj[1][1] *= -1;  // Flip Y for Vulkan
+    ubo.proj[1][1] *= -1;
 
-    // Camera position for specular calculations
+    ubo.lightSpaceMatrix = lightSpaceMatrix;  // NEW
+
     ubo.viewPos = cameras[activeCameraIndex].getPosition();
 
-    // Time for shader animations
     static auto startTime = std::chrono::high_resolution_clock::now();
     auto currentTime = std::chrono::high_resolution_clock::now();
     ubo.time = std::chrono::duration<float>(currentTime - startTime).count();
 
-    // Dynamic lighting from day/night cycle
     ubo.lightPos = lightState.position;
     ubo.lightIntensity = lightState.intensity;
     ubo.lightColor = lightState.color;
     ubo.ambientStrength = lightState.ambientStrength;
 
     memcpy(uniformBuffersMapped[currentImage], &ubo, sizeof(ubo));
+
+    // Update shadow UBO
+    ShadowUBO shadowUbo{};
+    shadowUbo.lightSpaceMatrix = lightSpaceMatrix;
+    shadowUbo.model = glm::mat4(1.0f);
+    memcpy(shadowUniformBuffersMapped[currentImage], &shadowUbo, sizeof(shadowUbo));
 }
 
 // --- Helper Implementations ---
@@ -1277,12 +1381,12 @@ void HelloTriangleApplication::populateDebugMessengerCreateInfo(VkDebugUtilsMess
     createInfo.pfnUserCallback = debugCallback;
 }
 
-bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device) {
-    QueueFamilyIndices indices = findQueueFamilies(device);
-    bool extensionsSupported = checkDeviceExtensionSupport(device);
+bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice dev) {
+    QueueFamilyIndices indices = findQueueFamilies(dev);
+    bool extensionsSupported = checkDeviceExtensionSupport(dev);
     bool swapChainAdequate = false;
     if (extensionsSupported) {
-        SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
+        SwapChainSupportDetails swapChainSupport = querySwapChainSupport(dev);
         swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
     }
 
@@ -1291,16 +1395,16 @@ bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device) {
     VkPhysicalDeviceFeatures2 features2{};
     features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
     features2.pNext = &dynamicRenderingFeatures;
-    vkGetPhysicalDeviceFeatures2(device, &features2);
+    vkGetPhysicalDeviceFeatures2(dev, &features2);
 
     return indices.isComplete() && extensionsSupported && swapChainAdequate && dynamicRenderingFeatures.dynamicRendering;
 }
 
-bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice device) {
+bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice dev) {
     uint32_t extensionCount;
-    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+    vkEnumerateDeviceExtensionProperties(dev, nullptr, &extensionCount, nullptr);
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
-    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
+    vkEnumerateDeviceExtensionProperties(dev, nullptr, &extensionCount, availableExtensions.data());
     std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
     for (const auto& extension : availableExtensions) {
         requiredExtensions.erase(extension.extensionName);
@@ -1308,19 +1412,19 @@ bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice devi
     return requiredExtensions.empty();
 }
 
-QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice device) {
+QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice dev) {
     QueueFamilyIndices indices;
     uint32_t queueFamilyCount = 0;
-    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+    vkGetPhysicalDeviceQueueFamilyProperties(dev, &queueFamilyCount, nullptr);
     std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
-    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+    vkGetPhysicalDeviceQueueFamilyProperties(dev, &queueFamilyCount, queueFamilies.data());
     int i = 0;
     for (const auto& queueFamily : queueFamilies) {
         if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
             indices.graphicsFamily = i;
         }
         VkBool32 presentSupport = false;
-        vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+        vkGetPhysicalDeviceSurfaceSupportKHR(dev, i, surface, &presentSupport);
         if (presentSupport) {
             indices.presentFamily = i;
         }
@@ -1332,20 +1436,20 @@ QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice 
     return indices;
 }
 
-SwapChainSupportDetails HelloTriangleApplication::querySwapChainSupport(VkPhysicalDevice device) {
+SwapChainSupportDetails HelloTriangleApplication::querySwapChainSupport(VkPhysicalDevice dev) {
     SwapChainSupportDetails details;
-    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(dev, surface, &details.capabilities);
     uint32_t formatCount;
-    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
+    vkGetPhysicalDeviceSurfaceFormatsKHR(dev, surface, &formatCount, nullptr);
     if (formatCount != 0) {
         details.formats.resize(formatCount);
-        vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
+        vkGetPhysicalDeviceSurfaceFormatsKHR(dev, surface, &formatCount, details.formats.data());
     }
     uint32_t presentModeCount;
-    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
+    vkGetPhysicalDeviceSurfacePresentModesKHR(dev, surface, &presentModeCount, nullptr);
     if (presentModeCount != 0) {
         details.presentModes.resize(presentModeCount);
-        vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
+        vkGetPhysicalDeviceSurfacePresentModesKHR(dev, surface, &presentModeCount, details.presentModes.data());
     }
     return details;
 }
@@ -1511,8 +1615,8 @@ uint32_t HelloTriangleApplication::findMemoryType(uint32_t typeFilter, VkMemoryP
 
 // --- Callback Implementations ---
 
-void HelloTriangleApplication::framebufferResizeCallback(GLFWwindow* window, int width, int height) {
-    auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
+void HelloTriangleApplication::framebufferResizeCallback(GLFWwindow* win, int width, int height) {
+    auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(win));
     app->framebufferResized = true;
 }
 
@@ -1589,6 +1693,12 @@ void HelloTriangleApplication::setupInputCallbacks()
             fireParticles.stop();
             std::cout << "F4: Fire effect STOPPED\n";
         }
+        });
+
+    // Shader switching (F5)
+    inputHandler.onShaderSwitch([this]() {
+        usePhongShading = !usePhongShading;
+        std::cout << "F5: Switched to " << (usePhongShading ? "PHONG" : "GOURAUD") << " shading\n";
         });
 
     // Time control
@@ -1857,13 +1967,22 @@ void HelloTriangleApplication::initParticleSystems() {
     fireParticles.init(ParticleSystem::EffectType::Fire, glm::vec3(20.0f, 6.0f, 15.0f));
     fireParticles.stop();  // Start inactive
 
-    // Ambient sand particles across the desert
+    // Ambient sand particles - controlled by config
     sandParticles.init(ParticleSystem::EffectType::Sand, glm::vec3(0.0f, 2.0f, 0.0f));
-    sandParticles.start();  // Always active
+
+    // Use config to determine if sand particles should be active
+    if (sceneConfig.sandParticlesEnabled) {
+        sandParticles.start();
+        std::cout << "Sand particles: ENABLED\n";
+    }
+    else {
+        sandParticles.stop();
+        std::cout << "Sand particles: DISABLED\n";
+    }
 
     // Create particle buffers (dynamic - will be updated each frame)
-    VkDeviceSize vertexBufferSize = sizeof(ParticleVertex) * 4000;  // Max vertices
-    VkDeviceSize indexBufferSize = sizeof(uint32_t) * 6000;         // Max indices
+    VkDeviceSize vertexBufferSize = sizeof(ParticleVertex) * 4000;
+    VkDeviceSize indexBufferSize = sizeof(uint32_t) * 6000;
 
     createBuffer(vertexBufferSize,
         VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
@@ -1941,6 +2060,445 @@ void HelloTriangleApplication::renderParticles(VkCommandBuffer commandBuffer) {
 }
 
 // --- PARTICLE SYSTEM END ---
+
+// --- SHADOW MAPPING ---
+void HelloTriangleApplication::createShadowMapResources() {
+    // Create shadow map image
+    VkFormat depthFormat = findDepthFormat();
+
+    VkImageCreateInfo imageInfo{};
+    imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    imageInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageInfo.extent.width = SHADOW_MAP_SIZE;
+    imageInfo.extent.height = SHADOW_MAP_SIZE;
+    imageInfo.extent.depth = 1;
+    imageInfo.mipLevels = 1;
+    imageInfo.arrayLayers = 1;
+    imageInfo.format = depthFormat;
+    imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    imageInfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT;
+    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+    if (vkCreateImage(device, &imageInfo, nullptr, &shadowMapImage) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow map image!");
+    }
+
+    // Allocate memory
+    VkMemoryRequirements memRequirements;
+    vkGetImageMemoryRequirements(device, shadowMapImage, &memRequirements);
+
+    VkMemoryAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    allocInfo.allocationSize = memRequirements.size;
+    allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits,
+        VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+
+    if (vkAllocateMemory(device, &allocInfo, nullptr, &shadowMapMemory) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate shadow map memory!");
+    }
+
+    vkBindImageMemory(device, shadowMapImage, shadowMapMemory, 0);
+
+    // Create image view
+    VkImageViewCreateInfo viewInfo{};
+    viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    viewInfo.image = shadowMapImage;
+    viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    viewInfo.format = depthFormat;
+    viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
+    viewInfo.subresourceRange.baseMipLevel = 0;
+    viewInfo.subresourceRange.levelCount = 1;
+    viewInfo.subresourceRange.baseArrayLayer = 0;
+    viewInfo.subresourceRange.layerCount = 1;
+
+    if (vkCreateImageView(device, &viewInfo, nullptr, &shadowMapImageView) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow map image view!");
+    }
+
+    // Create sampler with comparison mode for shadow mapping
+    VkSamplerCreateInfo samplerInfo{};
+    samplerInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
+    samplerInfo.magFilter = VK_FILTER_LINEAR;
+    samplerInfo.minFilter = VK_FILTER_LINEAR;
+    samplerInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    samplerInfo.anisotropyEnable = VK_FALSE;
+    samplerInfo.borderColor = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE;  // White = max depth = no shadow
+    samplerInfo.unnormalizedCoordinates = VK_FALSE;
+    samplerInfo.compareEnable = VK_FALSE;
+    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
+
+    if (vkCreateSampler(device, &samplerInfo, nullptr, &shadowMapSampler) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow map sampler!");
+    }
+
+    // Create shadow uniform buffers
+    VkDeviceSize bufferSize = sizeof(ShadowUBO);
+    shadowUniformBuffers.resize(MAX_FRAMES_IN_FLIGHT);
+    shadowUniformBuffersMemory.resize(MAX_FRAMES_IN_FLIGHT);
+    shadowUniformBuffersMapped.resize(MAX_FRAMES_IN_FLIGHT);
+
+    for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) {
+        createBuffer(bufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            shadowUniformBuffers[i], shadowUniformBuffersMemory[i]);
+        vkMapMemory(device, shadowUniformBuffersMemory[i], 0, bufferSize, 0,
+            &shadowUniformBuffersMapped[i]);
+    }
+}
+
+void HelloTriangleApplication::createShadowPipeline() {
+    auto vertShaderCode = readFile("shaders/shadow_vert.spv");
+    auto fragShaderCode = readFile("shaders/shadow_frag.spv");
+
+    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+
+    VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+    vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+    vertShaderStageInfo.module = vertShaderModule;
+    vertShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+    fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+    fragShaderStageInfo.module = fragShaderModule;
+    fragShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo, fragShaderStageInfo };
+
+    // Use same vertex input as main pipeline
+    auto bindingDescription = Vertex::getBindingDescription();
+    auto attributeDescriptions = Vertex::getAttributeDescriptions();
+
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+    vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+    vertexInputInfo.vertexBindingDescriptionCount = 1;
+    vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+    vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+    vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+
+    VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+    inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+    VkPipelineViewportStateCreateInfo viewportState{};
+    viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+    viewportState.viewportCount = 1;
+    viewportState.scissorCount = 1;
+
+    VkPipelineRasterizationStateCreateInfo rasterizer{};
+    rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+    rasterizer.depthClampEnable = VK_FALSE;
+    rasterizer.rasterizerDiscardEnable = VK_FALSE;
+    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+    rasterizer.lineWidth = 1.0f;
+    rasterizer.cullMode = VK_CULL_MODE_FRONT_BIT;  // Cull front faces to reduce peter-panning
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    rasterizer.depthBiasEnable = VK_TRUE;  // Enable depth bias for shadow acne
+    rasterizer.depthBiasConstantFactor = 1.25f;
+    rasterizer.depthBiasSlopeFactor = 1.75f;
+
+    VkPipelineMultisampleStateCreateInfo multisampling{};
+    multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+    multisampling.sampleShadingEnable = VK_FALSE;
+    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+    VkPipelineDepthStencilStateCreateInfo depthStencil{};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = VK_TRUE;
+    depthStencil.depthWriteEnable = VK_TRUE;
+    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
+
+    // No color attachment for shadow pass
+    VkPipelineColorBlendStateCreateInfo colorBlending{};
+    colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+    colorBlending.logicOpEnable = VK_FALSE;
+    colorBlending.attachmentCount = 0;
+    colorBlending.pAttachments = nullptr;
+
+    std::vector<VkDynamicState> dynamicStates = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+    VkPipelineDynamicStateCreateInfo dynamicState{};
+    dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+    dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
+    dynamicState.pDynamicStates = dynamicStates.data();
+
+    // Create pipeline layout for shadow pass
+    VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
+    pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+    pipelineLayoutInfo.setLayoutCount = 1;
+    pipelineLayoutInfo.pSetLayouts = &shadowDescriptorSetLayout;
+
+    if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &shadowPipelineLayout) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow pipeline layout!");
+    }
+
+    VkFormat depthFormat = findDepthFormat();
+
+    VkPipelineRenderingCreateInfo renderingCreateInfo{};
+    renderingCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO;
+    renderingCreateInfo.colorAttachmentCount = 0;
+    renderingCreateInfo.depthAttachmentFormat = depthFormat;
+
+    VkGraphicsPipelineCreateInfo pipelineInfo{};
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    pipelineInfo.pNext = &renderingCreateInfo;
+    pipelineInfo.stageCount = 2;
+    pipelineInfo.pStages = shaderStages;
+    pipelineInfo.pVertexInputState = &vertexInputInfo;
+    pipelineInfo.pInputAssemblyState = &inputAssembly;
+    pipelineInfo.pViewportState = &viewportState;
+    pipelineInfo.pRasterizationState = &rasterizer;
+    pipelineInfo.pMultisampleState = &multisampling;
+    pipelineInfo.pDepthStencilState = &depthStencil;
+    pipelineInfo.pColorBlendState = &colorBlending;
+    pipelineInfo.pDynamicState = &dynamicState;
+    pipelineInfo.layout = shadowPipelineLayout;
+    pipelineInfo.renderPass = VK_NULL_HANDLE;
+    pipelineInfo.subpass = 0;
+
+    if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &shadowPipeline) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create shadow pipeline!");
+    }
+
+    vkDestroyShaderModule(device, fragShaderModule, nullptr);
+    vkDestroyShaderModule(device, vertShaderModule, nullptr);
+}
+
+void HelloTriangleApplication::updateLightSpaceMatrix() {
+    DayNightCycle::LightState lightState = dayNightCycle.getLightState();
+
+    // Orthographic projection for directional light
+    float orthoSize = 150.0f;  // Reverted to original
+    glm::mat4 lightProjection = glm::ortho(
+        -orthoSize, orthoSize,
+        -orthoSize, orthoSize,
+        1.0f, 500.0f  // Reverted to original
+    );
+
+    // Light view matrix (looking at scene center from light position)
+    glm::vec3 lightPos = lightState.position;
+    glm::vec3 lightTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+
+    // Handle case when light is directly above/below
+    glm::vec3 lightDir = glm::normalize(lightPos - lightTarget);
+    if (abs(glm::dot(lightDir, up)) > 0.99f) {
+        up = glm::vec3(0.0f, 0.0f, 1.0f);
+    }
+
+    glm::mat4 lightView = glm::lookAt(lightPos, lightTarget, up);
+
+    lightSpaceMatrix = lightProjection * lightView;
+}
+
+void HelloTriangleApplication::renderShadowPass(VkCommandBuffer commandBuffer) {
+    // Transition shadow map for rendering
+    VkImageMemoryBarrier2 shadowBarrier{};
+    shadowBarrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
+    shadowBarrier.srcStageMask = VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT;
+    shadowBarrier.srcAccessMask = VK_ACCESS_2_SHADER_READ_BIT;
+    shadowBarrier.dstStageMask = VK_PIPELINE_STAGE_2_EARLY_FRAGMENT_TESTS_BIT;
+    shadowBarrier.dstAccessMask = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    shadowBarrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    shadowBarrier.newLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    shadowBarrier.image = shadowMapImage;
+    shadowBarrier.subresourceRange = { VK_IMAGE_ASPECT_DEPTH_BIT, 0, 1, 0, 1 };
+
+    VkDependencyInfo depInfo{};
+    depInfo.sType = VK_STRUCTURE_TYPE_DEPENDENCY_INFO;
+    depInfo.imageMemoryBarrierCount = 1;
+    depInfo.pImageMemoryBarriers = &shadowBarrier;
+    vkCmdPipelineBarrier2(commandBuffer, &depInfo);
+
+    // Setup shadow rendering
+    VkRenderingAttachmentInfo depthAttachment{};
+    depthAttachment.sType = VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO;
+    depthAttachment.imageView = shadowMapImageView;
+    depthAttachment.imageLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    depthAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    depthAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+    depthAttachment.clearValue.depthStencil = { 1.0f, 0 };
+
+    VkRenderingInfo renderingInfo{};
+    renderingInfo.sType = VK_STRUCTURE_TYPE_RENDERING_INFO;
+    renderingInfo.renderArea = { {0, 0}, {SHADOW_MAP_SIZE, SHADOW_MAP_SIZE} };
+    renderingInfo.layerCount = 1;
+    renderingInfo.colorAttachmentCount = 0;
+    renderingInfo.pDepthAttachment = &depthAttachment;
+
+    vkCmdBeginRendering(commandBuffer, &renderingInfo);
+
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, shadowPipeline);
+
+    VkViewport viewport{};
+    viewport.width = static_cast<float>(SHADOW_MAP_SIZE);
+    viewport.height = static_cast<float>(SHADOW_MAP_SIZE);
+    viewport.minDepth = 0.0f;
+    viewport.maxDepth = 1.0f;
+    vkCmdSetViewport(commandBuffer, 0, 1, &viewport);
+
+    VkRect2D scissor{};
+    scissor.extent = { SHADOW_MAP_SIZE, SHADOW_MAP_SIZE };
+    vkCmdSetScissor(commandBuffer, 0, 1, &scissor);
+
+    VkBuffer vertexBuffers[] = { vertexBuffer };
+    VkDeviceSize offsets[] = { 0 };
+    vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
+    vkCmdBindIndexBuffer(commandBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT32);
+    vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+        shadowPipelineLayout, 0, 1, &shadowDescriptorSets[currentFrame], 0, nullptr);
+
+    vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
+
+    vkCmdEndRendering(commandBuffer);
+
+    // Transition shadow map for sampling
+    VkImageMemoryBarrier2 shadowBarrierToRead{};
+    shadowBarrierToRead.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2;
+    shadowBarrierToRead.srcStageMask = VK_PIPELINE_STAGE_2_LATE_FRAGMENT_TESTS_BIT;
+    shadowBarrierToRead.srcAccessMask = VK_ACCESS_2_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+    shadowBarrierToRead.dstStageMask = VK_PIPELINE_STAGE_2_FRAGMENT_SHADER_BIT;
+    shadowBarrierToRead.dstAccessMask = VK_ACCESS_2_SHADER_READ_BIT;
+    shadowBarrierToRead.oldLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    shadowBarrierToRead.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+    shadowBarrierToRead.image = shadowMapImage;
+    shadowBarrierToRead.subresourceRange = { VK_IMAGE_ASPECT_DEPTH_BIT, 0, 1, 0, 1 };
+
+    VkDependencyInfo depInfoToRead{};
+    depInfoToRead.sType = VK_STRUCTURE_TYPE_DEPENDENCY_INFO;
+    depInfoToRead.imageMemoryBarrierCount = 1;
+    depInfoToRead.pImageMemoryBarriers = &shadowBarrierToRead;
+    vkCmdPipelineBarrier2(commandBuffer, &depInfoToRead);
+}
+// --- SHADOW MAPPING END ---
+
+
+// --- GOURAUD SHADING ---
+void HelloTriangleApplication::createGouraudPipeline() {
+    auto vertShaderCode = readFile("shaders/gouraud_vert.spv");
+    auto fragShaderCode = readFile("shaders/gouraud_frag.spv");
+
+    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+
+    VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+    vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+    vertShaderStageInfo.module = vertShaderModule;
+    vertShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+    fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+    fragShaderStageInfo.module = fragShaderModule;
+    fragShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo, fragShaderStageInfo };
+
+    // Same vertex input as main pipeline
+    auto bindingDescription = Vertex::getBindingDescription();
+    auto attributeDescriptions = Vertex::getAttributeDescriptions();
+
+    VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
+    vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+    vertexInputInfo.vertexBindingDescriptionCount = 1;
+    vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+    vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+    vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
+
+    VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
+    inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    inputAssembly.primitiveRestartEnable = VK_FALSE;
+
+    VkPipelineViewportStateCreateInfo viewportState{};
+    viewportState.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+    viewportState.viewportCount = 1;
+    viewportState.scissorCount = 1;
+
+    VkPipelineRasterizationStateCreateInfo rasterizer{};
+    rasterizer.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+    rasterizer.depthClampEnable = VK_FALSE;
+    rasterizer.rasterizerDiscardEnable = VK_FALSE;
+    rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
+    rasterizer.lineWidth = 1.0f;
+    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    rasterizer.depthBiasEnable = VK_FALSE;
+
+    VkPipelineMultisampleStateCreateInfo multisampling{};
+    multisampling.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+    multisampling.sampleShadingEnable = VK_FALSE;
+    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+
+    VkPipelineDepthStencilStateCreateInfo depthStencil{};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = VK_TRUE;
+    depthStencil.depthWriteEnable = VK_TRUE;
+    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS;
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
+
+    VkPipelineColorBlendAttachmentState colorBlendAttachment{};
+    colorBlendAttachment.colorWriteMask = VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT |
+        VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+    colorBlendAttachment.blendEnable = VK_FALSE;
+
+    VkPipelineColorBlendStateCreateInfo colorBlending{};
+    colorBlending.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+    colorBlending.logicOpEnable = VK_FALSE;
+    colorBlending.attachmentCount = 1;
+    colorBlending.pAttachments = &colorBlendAttachment;
+
+    std::vector<VkDynamicState> dynamicStates = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+    VkPipelineDynamicStateCreateInfo dynamicState{};
+    dynamicState.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+    dynamicState.dynamicStateCount = static_cast<uint32_t>(dynamicStates.size());
+    dynamicState.pDynamicStates = dynamicStates.data();
+
+    VkFormat depthFormat = findDepthFormat();
+
+    VkPipelineRenderingCreateInfo renderingCreateInfo{};
+    renderingCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO;
+    renderingCreateInfo.colorAttachmentCount = 1;
+    renderingCreateInfo.pColorAttachmentFormats = &swapChainImageFormat;
+    renderingCreateInfo.depthAttachmentFormat = depthFormat;
+
+    VkGraphicsPipelineCreateInfo pipelineInfo{};
+    pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    pipelineInfo.pNext = &renderingCreateInfo;
+    pipelineInfo.stageCount = 2;
+    pipelineInfo.pStages = shaderStages;
+    pipelineInfo.pVertexInputState = &vertexInputInfo;
+    pipelineInfo.pInputAssemblyState = &inputAssembly;
+    pipelineInfo.pViewportState = &viewportState;
+    pipelineInfo.pRasterizationState = &rasterizer;
+    pipelineInfo.pMultisampleState = &multisampling;
+    pipelineInfo.pColorBlendState = &colorBlending;
+    pipelineInfo.pDynamicState = &dynamicState;
+    pipelineInfo.pDepthStencilState = &depthStencil;
+    pipelineInfo.layout = pipelineLayout;  // Reuse same layout
+    pipelineInfo.renderPass = VK_NULL_HANDLE;
+    pipelineInfo.subpass = 0;
+
+    if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &gouraudPipeline) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create Gouraud pipeline!");
+    }
+
+    vkDestroyShaderModule(device, fragShaderModule, nullptr);
+    vkDestroyShaderModule(device, vertShaderModule, nullptr);
+
+    std::cout << "Gouraud pipeline created successfully\n";
+}
+// --- GOURAUD SHADING END ---
 
 int main() {
     HelloTriangleApplication app;

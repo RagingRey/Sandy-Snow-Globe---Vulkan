@@ -122,7 +122,9 @@ glslangValidator -V "$(ProjectDir)SHADERS\shader.frag" -o "$(ProjectDir)shaders\
 glslangValidator -V "$(ProjectDir)SHADERS\gouraud.vert" -o "$(ProjectDir)shaders\gouraud_vert.spv"
 glslangValidator -V "$(ProjectDir)SHADERS\gouraud.frag" -o "$(ProjectDir)shaders\gouraud_frag.spv"
 glslangValidator -V "$(ProjectDir)SHADERS\particle.vert" -o "$(ProjectDir)shaders\particle_vert.spv"
-glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shaders\particle_frag.spv"</Command>
+glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shaders\particle_frag.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\shadow.vert" -o "$(ProjectDir)shaders\shadow_vert.spv"
+glslangValidator -V "$(ProjectDir)SHADERS\shadow.frag" -o "$(ProjectDir)shaders\shadow_frag.spv"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -170,6 +172,7 @@ glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shader
   <ItemGroup>
     <ClCompile Include="Cactus.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ConfigLoader.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Lab_Tutorial_Template.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -194,6 +197,7 @@ glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shader
   <ItemGroup>
     <ClInclude Include="Cactus.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ConfigLoader.h" />
     <ClInclude Include="DayNightCycle.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Mesh.h" />
@@ -210,6 +214,9 @@ glslangValidator -V "$(ProjectDir)SHADERS\particle.frag" -o "$(ProjectDir)shader
     <None Include="glsl SHADERS\particle.frag" />
     <None Include="glsl SHADERS\particle.vert" />
     <None Include="glsl SHADERS\shader.frag" />
+    <None Include="glsl SHADERS\shadow.frag" />
+    <None Include="glsl SHADERS\shadow.vert" />
+    <None Include="txt scene.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

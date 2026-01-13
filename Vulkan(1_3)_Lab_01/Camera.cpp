@@ -35,27 +35,27 @@ void Camera::rotatePitch(float angleDegrees) {
 
 void Camera::panHorizontal(float amount) {
     // Calculate right vector from current view direction
-    glm::vec3 forward = glm::normalize(m_target - m_position);
-    glm::vec3 right = glm::normalize(glm::cross(forward, m_up));
+    const glm::vec3 forward = glm::normalize(m_target - m_position);
+    const glm::vec3 right = glm::normalize(glm::cross(forward, m_up));
     
-    glm::vec3 offset = right * amount * m_panSpeed;
+    const glm::vec3 offset = right * amount * m_panSpeed;
     m_position += offset;
     m_target += offset;
 }
 
 void Camera::panForward(float amount) {
     // Move along the view direction (projected onto horizontal plane)
-    glm::vec3 forward = glm::normalize(m_target - m_position);
+    const glm::vec3 forward = glm::normalize(m_target - m_position);
     // Keep movement horizontal by zeroing Y component
-    glm::vec3 horizontalForward = glm::normalize(glm::vec3(forward.x, 0.0f, forward.z));
+    const glm::vec3 horizontalForward = glm::normalize(glm::vec3(forward.x, 0.0f, forward.z));
     
-    glm::vec3 offset = horizontalForward * amount * m_panSpeed;
+    const glm::vec3 offset = horizontalForward * amount * m_panSpeed;
     m_position += offset;
     m_target += offset;
 }
 
 void Camera::panVertical(float amount) {
-    glm::vec3 offset = glm::vec3(0.0f, amount * m_panSpeed, 0.0f);
+    const glm::vec3 offset = glm::vec3(0.0f, amount * m_panSpeed, 0.0f);
     m_position += offset;
     m_target += offset;
 }
@@ -82,8 +82,8 @@ void Camera::setTarget(const glm::vec3& target) {
 void Camera::updateVectorsFromSpherical() {
     // Convert spherical to Cartesian coordinates
     // Position orbits around target at distance m_distance
-    float yawRad = glm::radians(m_yaw);
-    float pitchRad = glm::radians(m_pitch);
+    const float yawRad = glm::radians(m_yaw);
+    const float pitchRad = glm::radians(m_pitch);
 
     glm::vec3 offset;
     offset.x = m_distance * cos(pitchRad) * cos(yawRad);
@@ -94,7 +94,7 @@ void Camera::updateVectorsFromSpherical() {
 }
 
 void Camera::updateSphericalFromVectors() {
-    glm::vec3 offset = m_position - m_target;
+    const glm::vec3 offset = m_position - m_target;
     m_distance = glm::length(offset);
     
     if (m_distance > 0.001f) {

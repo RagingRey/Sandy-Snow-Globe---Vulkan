@@ -15,7 +15,7 @@
  * - Stores initial state for reset functionality
  * - Decoupled from input handling for reusability
  */
-class Camera {
+class Camera final{
 public:
     enum class Type {
         Overview,    // C1: Fixed overview of the globe
@@ -51,9 +51,9 @@ public:
     void reset();
 
     // Getters
-    glm::vec3 getPosition() const { return m_position; }
-    glm::vec3 getTarget() const { return m_target; }
-    glm::vec3 getUp() const { return m_up; }
+    glm::vec3& getPosition()  { return m_position; }
+    glm::vec3& getTarget()  { return m_target; }
+    glm::vec3& getUp()  { return m_up; }
     Type getType() const { return m_type; }
 
     // Setters for configuration

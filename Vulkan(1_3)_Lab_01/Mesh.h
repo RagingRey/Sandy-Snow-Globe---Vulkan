@@ -18,7 +18,7 @@
  * - Separation from loader allows reuse with different file formats
  * - Bounding box useful for culling and collision
  */
-class Mesh {
+class Mesh final{
 public:
     Mesh() = default;
     Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices);

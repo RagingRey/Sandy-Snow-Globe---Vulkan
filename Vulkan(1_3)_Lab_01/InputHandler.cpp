@@ -9,32 +9,35 @@ void InputHandler::keyCallback(GLFWwindow* window, int key, int scancode, int ac
     auto* handler = static_cast<InputHandler*>(glfwGetWindowUserPointer(window));
     if (!handler) return;
 
-    // Handle single-press events
     if (action == GLFW_PRESS) {
         switch (key) {
-            case GLFW_KEY_ESCAPE:
-                if (handler->m_onExit) handler->m_onExit();
-                break;
-            case GLFW_KEY_R:
-                if (handler->m_onReset) handler->m_onReset();
-                break;
-            case GLFW_KEY_F1:
-            case GLFW_KEY_F2:
-            case GLFW_KEY_F3:
-                if (handler->m_cameraSwitchCallbacks.count(key)) {
-                    handler->m_cameraSwitchCallbacks[key]();
-                }
-                break;
-            case GLFW_KEY_F4:
-                if (handler->m_onParticleEffect) handler->m_onParticleEffect();
-                break;
-            case GLFW_KEY_T:
-                if (mods & GLFW_MOD_SHIFT) {
-                    if (handler->m_onTimeIncrease) handler->m_onTimeIncrease();
-                } else {
-                    if (handler->m_onTimeDecrease) handler->m_onTimeDecrease();
-                }
-                break;
+        case GLFW_KEY_ESCAPE:
+            if (handler->m_onExit) handler->m_onExit();
+            break;
+        case GLFW_KEY_R:
+            if (handler->m_onReset) handler->m_onReset();
+            break;
+        case GLFW_KEY_F1:
+        case GLFW_KEY_F2:
+        case GLFW_KEY_F3:
+            if (handler->m_cameraSwitchCallbacks.count(key)) {
+                handler->m_cameraSwitchCallbacks[key]();
+            }
+            break;
+        case GLFW_KEY_F4:
+            if (handler->m_onParticleEffect) handler->m_onParticleEffect();
+            break;
+        case GLFW_KEY_F5:  // NEW: Shader switching
+            if (handler->m_onShaderSwitch) handler->m_onShaderSwitch();
+            break;
+        case GLFW_KEY_T:
+            if (mods & GLFW_MOD_SHIFT) {
+                if (handler->m_onTimeIncrease) handler->m_onTimeIncrease();
+            }
+            else {
+                if (handler->m_onTimeDecrease) handler->m_onTimeDecrease();
+            }
+            break;
         }
     }
 }

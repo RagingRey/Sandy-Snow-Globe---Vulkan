@@ -25,6 +25,8 @@ public:
     void onReset(KeyCallback callback) { m_onReset = callback; }
     void onCameraSwitch(int cameraIndex, KeyCallback callback);
     void onParticleEffect(KeyCallback callback) { m_onParticleEffect = callback; }
+    // Add this callback declaration in the public section after onParticleEffect:
+    void onShaderSwitch(KeyCallback callback) { m_onShaderSwitch = callback; }
     void onTimeDecrease(KeyCallback callback) { m_onTimeDecrease = callback; }
     void onTimeIncrease(KeyCallback callback) { m_onTimeIncrease = callback; }
 
@@ -47,6 +49,7 @@ private:
     KeyCallback m_onExit;
     KeyCallback m_onReset;
     KeyCallback m_onParticleEffect;
+    KeyCallback m_onShaderSwitch;
     KeyCallback m_onTimeDecrease;
     KeyCallback m_onTimeIncrease;
     std::unordered_map<int, KeyCallback> m_cameraSwitchCallbacks;

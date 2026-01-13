@@ -76,13 +76,13 @@ int32_t TextureManager::loadTexture(const std::string& filepath) {
                 texture.image, texture.memory);
 
     // Transition and copy
-    transitionImageLayout(texture.image, VK_FORMAT_R8G8B8A8_SRGB,
+    transitionImageLayout(texture.image,
                           VK_IMAGE_LAYOUT_UNDEFINED,
                           VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
     copyBufferToImage(stagingBuffer, texture.image, texture.width, texture.height);
 
-    transitionImageLayout(texture.image, VK_FORMAT_R8G8B8A8_SRGB,
+    transitionImageLayout(texture.image,
                           VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                           VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
@@ -144,13 +144,13 @@ int32_t TextureManager::createTexture(uint32_t width, uint32_t height,
                 VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
                 texture.image, texture.memory);
 
-    transitionImageLayout(texture.image, VK_FORMAT_R8G8B8A8_SRGB,
+    transitionImageLayout(texture.image,
                           VK_IMAGE_LAYOUT_UNDEFINED,
                           VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
     copyBufferToImage(stagingBuffer, texture.image, width, height);
 
-    transitionImageLayout(texture.image, VK_FORMAT_R8G8B8A8_SRGB,
+    transitionImageLayout(texture.image,
                           VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
                           VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
@@ -279,8 +279,7 @@ void TextureManager::createImage(uint32_t width, uint32_t height, VkFormat forma
     vkBindImageMemory(m_device, image, memory, 0);
 }
 
-void TextureManager::transitionImageLayout(VkImage image, VkFormat format,
-                                            VkImageLayout oldLayout,
+void TextureManager::transitionImageLayout(VkImage image, VkImageLayout oldLayout,
                                             VkImageLayout newLayout) {
     VkCommandBuffer commandBuffer = beginSingleTimeCommands();
 

@@ -1,0 +1,190 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>OPT-24
+<b>Function 'getViewMatrix' is not inlined
+<l>20
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'forward' as const
+<l>38
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'right' as const
+<l>39
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'offset' as const
+<l>41
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'forward' as const
+<l>48
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'horizontalForward' as const
+<l>50
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'offset' as const
+<l>52
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'offset' as const
+<l>58
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'yawRad' as const
+<l>85
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'pitchRad' as const
+<l>86
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'offset' as const
+<l>97
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.h
+<c>OPT-14
+<b>Returned value from function 'getPosition' is passed by value
+<l>54
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.h
+<c>OPT-14
+<b>Returned value from function 'getTarget' is passed by value
+<l>55
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.h
+<c>OPT-14
+<b>Returned value from function 'getUp' is passed by value
+<l>56
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.h
+<c>CODSTA-MCPP-23
+<b>Class 'Camera' should be final
+<l>18
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>INIT-14
+<b>Assignment in constructor 'Camera' found. Use constructor initialization list instead
+<l>16
+<k>5
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>INIT-14
+<b>Assignment in constructor 'Camera' found. Use constructor initialization list instead
+<l>17
+<k>5
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.h
+<c>OPT-13
+<b>Members 'm_initialPosition, m_initialTarget, m_initialUp' of class 'Camera' are declared in suboptimal order for memory layout
+<l>18
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Camera.cpp
+<c>OPT-24
+<b>Function 'getViewMatrix' is not inlined
+<l>20
+<k>19
+<s>false
+<N>
+<f>
+<L>0

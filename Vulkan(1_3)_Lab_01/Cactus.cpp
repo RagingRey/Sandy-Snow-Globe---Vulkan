@@ -10,11 +10,11 @@ Mesh Cactus::generateMesh() const {
     std::vector<Vertex> allVertices;
     std::vector<uint32_t> allIndices;
 
-    float actualHeight = m_config.height * m_growthFactor;
-    float actualRadius = m_config.trunkRadius * m_growthFactor;
+    const float actualHeight = m_config.height * m_growthFactor;
+    const float actualRadius = m_config.trunkRadius * m_growthFactor;
 
     // Generate main trunk (capped cylinder)
-    Mesh trunk = MeshGenerator::createCylinder(
+    const Mesh trunk = MeshGenerator::createCylinder(
         actualRadius,
         actualHeight,
         m_config.segments,
@@ -39,10 +39,10 @@ Mesh Cactus::generateMesh() const {
         float angle = (static_cast<float>(i) / m_config.numArms) * glm::two_pi<float>();
         angle += glm::pi<float>() * 0.25f; // Offset for visual interest
         
-        float attachHeight = actualHeight * m_config.armHeight;
-        float armLength = actualHeight * 0.4f;
+        const float attachHeight = actualHeight * m_config.armHeight;
+        const float armLength = actualHeight * 0.4f;
         
-        Mesh arm = generateArm(attachHeight, angle, armLength);
+        const Mesh arm = generateArm(attachHeight, angle, armLength);
         
         uint32_t indexOffset = static_cast<uint32_t>(allVertices.size());
         const auto& armVerts = arm.getVertices();
@@ -61,16 +61,16 @@ Mesh Cactus::generateArm(float attachHeight, float angle, float armLength) const
     std::vector<Vertex> armVertices;
     std::vector<uint32_t> armIndices;
 
-    float armRadius = m_config.trunkRadius * 0.6f * m_growthFactor;
-    float elbowLength = armLength * 0.5f;
+    const float armRadius = m_config.trunkRadius * 0.6f * m_growthFactor;
+    const float elbowLength = armLength * 0.5f;
 
     // Horizontal section (elbow)
-    Mesh horizontal = MeshGenerator::createCylinder(
+    const Mesh horizontal = MeshGenerator::createCylinder(
         armRadius, elbowLength, m_config.segments, m_config.color
     );
 
     // Vertical section (upper arm)
-    Mesh vertical = MeshGenerator::createCylinder(
+    const Mesh vertical = MeshGenerator::createCylinder(
         armRadius, armLength * 0.6f, m_config.segments, m_config.color
     );
 
@@ -87,10 +87,10 @@ Mesh Cactus::generateArm(float attachHeight, float angle, float armLength) const
     
     for (const auto& v : hVerts) {
         Vertex transformed = v;
-        glm::vec4 pos = transform * glm::vec4(v.position, 1.0f);
+        const glm::vec4 pos = transform * glm::vec4(v.position, 1.0f);
         transformed.position = glm::vec3(pos);
         // Transform normal
-        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(transform)));
+        const glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(transform)));
         transformed.normal = glm::normalize(normalMatrix * v.normal);
         armVertices.push_back(transformed);
     }
@@ -109,9 +109,9 @@ Mesh Cactus::generateArm(float attachHeight, float angle, float armLength) const
     
     for (const auto& v : vVerts) {
         Vertex transformed = v;
-        glm::vec4 pos = vertTransform * glm::vec4(v.position, 1.0f);
+        const glm::vec4 pos = vertTransform * glm::vec4(v.position, 1.0f);
         transformed.position = glm::vec3(pos);
-        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(vertTransform)));
+        const glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(vertTransform)));
         transformed.normal = glm::normalize(normalMatrix * v.normal);
         armVertices.push_back(transformed);
     }

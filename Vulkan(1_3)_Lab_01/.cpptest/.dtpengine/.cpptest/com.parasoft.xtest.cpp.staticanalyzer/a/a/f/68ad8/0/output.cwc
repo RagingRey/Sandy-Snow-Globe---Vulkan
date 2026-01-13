@@ -1,0 +1,1160 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'queueFamilyIndices' array should not be used
+<l>692
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'shaderStages' array should not be used
+<l>814
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'swapChains' array should not be used
+<l>1173
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'vertexBuffers' array should not be used
+<l>1302
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'offsets' array should not be used
+<l>1303
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'shaderStages' array should not be used
+<l>1860
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'vertexBuffers' array should not be used
+<l>2052
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'offsets' array should not be used
+<l>2053
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'shaderStages' array should not be used
+<l>2172
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'vertexBuffers' array should not be used
+<l>2352
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'offsets' array should not be used
+<l>2353
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>STL-37-DOWNGRADED
+<b>The 'shaderStages' array should not be used
+<l>2404
+<k>37
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'PFN_vkCreateDebugUtilsMessengerEXT' type
+<l>183
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'PFN_vkDestroyDebugUtilsMessengerEXT' type
+<l>193
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'uint32_t' type
+<l>554
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'uint32_t' type
+<l>554
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'uint32_t' type
+<l>554
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'uint32_t' type
+<l>554
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'size_t' type
+<l>940
+<k>35
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'size_t' type
+<l>958
+<k>34
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'uint32_t' type
+<l>1093
+<k>36
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-11
+<b>Use a C++-style cast instead of a C-style cast to the 'size_t' type
+<l>1528
+<k>23
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-51
+<b>Inline function 'isComplete' was found in source file
+<l>78
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-13
+<b>Members 'lightColor, lightPos' of structure 'UniformBufferObject' are declared in suboptimal order for memory layout
+<l>90
+<k>8
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'globeMesh' as const
+<l>129
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'groundMesh' as const
+<l>133
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cactusMesh' as const
+<l>164
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'populateDebugMessengerCreateInfo' should be declared as const
+<l>1376
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'checkDeviceExtensionSupport' should be declared as const
+<l>1403
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'findQueueFamilies' should be declared as const
+<l>1415
+<k>46
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'querySwapChainSupport' should be declared as const
+<l>1439
+<k>51
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'chooseSwapSurfaceFormat' should be declared as const
+<l>1457
+<k>46
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'chooseSwapPresentMode' should be declared as const
+<l>1466
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'chooseSwapExtent' should be declared as const
+<l>1475
+<k>38
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'getRequiredExtensions' should be declared as const
+<l>1492
+<k>52
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'checkValidationLayerSupport' should be declared as const
+<l>1503
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'createShaderModule' should be declared as const
+<l>1536
+<k>42
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'copyBuffer' should be declared as const
+<l>1574
+<k>32
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'findMemoryType' should be declared as const
+<l>1604
+<k>36
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'findSupportedFormat' should be declared as const
+<l>1783
+<k>36
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-MCPP-23
+<b>Class 'HelloTriangleApplication' should be final
+<l>200
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>MRM-49
+<b>Class 'HelloTriangleApplication' shall declare a copy assignment operator
+<l>200
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>MRM-49
+<b>Class 'HelloTriangleApplication' shall declare a copy constructor
+<l>200
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-13
+<b>Members 'commandPool, debugMessenger, depthImage, depthImageMemory, depthImageView, descriptorPool, descriptorSetLayout, device, gouraudPipeline, graphicsPipeline, graphicsQueue, indexBuffer, indexBufferMemory, instance, particleIndexBuffer, particleIndexBufferMemory, particlePipeline, particlePipelineLayout, particleVertexBuffer, particleVertexBufferMemory, physicalDevice, pipelineLayout, presentQueue, shadowDescriptorPool, shadowDescriptorSetLayout, shadowMapImage, shadowMapImageView, shadowMapMemory, shadowMapSampler, shadowPipeline, shadowPipelineLayout, surface, swapChain, vertexBuffer, vertexBufferMemory' of class 'HelloTriangleApplication' are declared in suboptimal order for memory layout
+<l>200
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-13
+<b>Members 'cameras, commandBuffers, dayNightCycle, descriptorSets, fireParticles, imageAvailableSemaphores, inFlightFences, inputHandler, lastFrameTime, lightSpaceMatrix, renderFinishedSemaphores, sandParticles, shadowDescriptorSets, shadowUniformBuffers, shadowUniformBuffersMapped, shadowUniformBuffersMemory, swapChainExtent, swapChainImageViews, swapChainImages, textureManager, uniformBuffers, uniformBuffersMapped, uniformBuffersMemory' of class 'HelloTriangleApplication' are declared in suboptimal order for memory layout
+<l>200
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-01
+<b>Variable "debugCreateInfo" should be declared as locally as possible
+<l>564
+<k>40
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-01
+<b>Variable "queueFamilyIndices" should be declared as locally as possible
+<l>692
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'findQueueFamilies' is passed by value
+<l>289
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'querySwapChainSupport' is passed by value
+<l>290
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'chooseSwapSurfaceFormat' is passed by value
+<l>291
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'chooseSwapExtent' is passed by value
+<l>293
+<k>16
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'getRequiredExtensions' is passed by value
+<l>294
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'readFile' is passed by value
+<l>296
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'currentTime' as const
+<l>475
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-01
+<b>Variable "debugCreateInfo" should be declared as locally as possible
+<l>564
+<k>40
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'queueFamily' as const
+<l>623
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'swapChainSupport' as const
+<l>671
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'surfaceFormat' as const
+<l>672
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'presentMode' as const
+<l>673
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'extent' as const
+<l>674
+<k>16
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-01
+<b>Variable "queueFamilyIndices" should be declared as locally as possible
+<l>692
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderCode' as const
+<l>796
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderCode' as const
+<l>797
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderModule' as const
+<l>799
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderModule' as const
+<l>800
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>888
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bufferSize' as const
+<l>933
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bufferSize' as const
+<l>951
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bufferSize' as const
+<l>969
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'imageView' as const
+<l>1210
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightState' as const
+<l>1265
+<k>31
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'activePipeline' as const
+<l>1289
+<k>16
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightState' as const
+<l>1339
+<k>31
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'startTime' as const
+<l>1356
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'currentTime' as const
+<l>1357
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'indices' as const
+<l>1385
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'extensionsSupported' as const
+<l>1386
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'swapChainSupport' as const
+<l>1389
+<k>33
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'findQueueFamilies' is passed by value
+<l>1415
+<k>46
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'querySwapChainSupport' is passed by value
+<l>1439
+<k>51
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'chooseSwapSurfaceFormat' is passed by value
+<l>1457
+<k>46
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'chooseSwapExtent' is passed by value
+<l>1475
+<k>38
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'getRequiredExtensions' is passed by value
+<l>1492
+<k>52
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'layerName' as const
+<l>1508
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-33
+<b>Returned value from function 'readFile' is passed by value
+<l>1523
+<k>45
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'app' as const
+<l>1619
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>MISRA2004-16_7
+<b>Pass parameter "pUserData" with const specifier
+<l>1627
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>1752
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'format' as const
+<l>1786
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderCode' as const
+<l>1842
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderCode' as const
+<l>1843
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderModule' as const
+<l>1845
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderModule' as const
+<l>1846
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>1932
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertexBufferSize' as const
+<l>1984
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'indexBufferSize' as const
+<l>1985
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cameraRight' as const
+<l>2005
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cameraUp' as const
+<l>2006
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'totalIndices' as const
+<l>2047
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>2067
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bufferSize' as const
+<l>2139
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderCode' as const
+<l>2154
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderCode' as const
+<l>2155
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderModule' as const
+<l>2157
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderModule' as const
+<l>2158
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>2243
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightState' as const
+<l>2276
+<k>31
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightProjection' as const
+<l>2280
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightDir' as const
+<l>2292
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'lightView' as const
+<l>2297
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderCode' as const
+<l>2386
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderCode' as const
+<l>2387
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'vertShaderModule' as const
+<l>2389
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'fragShaderModule' as const
+<l>2390
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'depthFormat' as const
+<l>2467
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Lab_Tutorial_Template.cpp
+<c>OPT-01
+<b>Variable "app" should be declared as locally as possible
+<l>2504
+<k>30
+<s>false
+<N>
+<f>
+<L>0

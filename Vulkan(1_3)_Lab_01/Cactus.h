@@ -21,7 +21,7 @@
  * - High cohesion: all methods relate to cactus representation
  * - Low coupling: depends only on Mesh and MeshGenerator
  */
-class Cactus {
+class Cactus final{
 public:
     /**
      * @brief Cactus configuration parameters

@@ -1,0 +1,370 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-33
+<b>Returned value from function 'load' is passed by value
+<l>7
+<k>41
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-33
+<b>Returned value from function 'getDefaults' is passed by value
+<l>43
+<k>41
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-01
+<b>Variable "rotation" should be declared as locally as possible
+<l>136
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-24
+<b>Function 'parseFloat' is not inlined
+<l>158
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-24
+<b>Function 'parseInt' is not inlined
+<l>162
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.h
+<c>CODSTA-MCPP-23
+<b>Class 'ConfigLoader' should be final
+<l>21
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.h
+<c>OPT-33
+<b>Returned value from function 'load' is passed by value
+<l>59
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.h
+<c>OPT-33
+<b>Returned value from function 'getDefaults' is passed by value
+<l>65
+<k>24
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-01
+<b>Variable "rotation" should be declared as locally as possible
+<l>136
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-24
+<b>Function 'parseFloat' is not inlined
+<l>158
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\ConfigLoader.cpp
+<c>OPT-24
+<b>Function 'parseInt' is not inlined
+<l>162
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Cactus.h
+<c>CODSTA-MCPP-23
+<b>Class 'Cactus' should be final
+<l>24
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Cactus.h
+<c>OPT-13
+<b>Members 'color' of structure 'Config' are declared in suboptimal order for memory layout
+<l>29
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Cactus.h
+<c>OPT-33
+<b>Returned value from function 'generateMesh' is passed by value
+<l>46
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Cactus.h
+<c>CODSTA-CPP-06
+<b>Member function 'getConfig' returns handles to member data: 'm_config'
+<l>61
+<k>39
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Cactus.h
+<c>OPT-33
+<b>Returned value from function 'generateArm' is passed by value
+<l>71
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'vertices' of function 'Mesh' is passed by value
+<l>24
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'indices' of function 'Mesh' is passed by value
+<l>24
+<k>62
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'vertices' of function 'setVertices' is passed by value
+<l>38
+<k>42
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'indices' of function 'setIndices' is passed by value
+<l>39
+<k>43
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMinBounds' is passed by value
+<l>33
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMaxBounds' is passed by value
+<l>34
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-MCPP-23
+<b>Class 'Mesh' should be final
+<l>21
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getVertices' returns handles to member data: 'm_vertices'
+<l>27
+<k>54
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getIndices' returns handles to member data: 'm_indices'
+<l>28
+<k>55
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getBindingDescription' is passed by value
+<l>31
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getAttributeDescriptions' is passed by value
+<l>39
+<k>61
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-95
+<b>The 'std' namespace should not be modified
+<l>71
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h1' as const
+<l>74
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h2' as const
+<l>75
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h3' as const
+<l>76
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h4' as const
+<l>77
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>CODSTA-MCPP-23
+<b>Class 'MeshGenerator' should be final
+<l>20
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createSphere' is passed by value
+<l>34
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createPlane' is passed by value
+<l>48
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createCylinder' is passed by value
+<l>62
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createCone' is passed by value
+<l>76
+<k>17
+<s>false
+<N>
+<f>
+<L>0

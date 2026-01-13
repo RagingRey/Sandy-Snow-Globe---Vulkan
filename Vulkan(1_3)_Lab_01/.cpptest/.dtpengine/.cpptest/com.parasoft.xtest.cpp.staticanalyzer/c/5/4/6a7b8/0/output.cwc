@@ -1,0 +1,640 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'phi' as const
+<l>12
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinPhi' as const
+<l>13
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosPhi' as const
+<l>14
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>17
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>18
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>19
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>OPT-33
+<b>Returned value from function 'createSphere' is passed by value
+<l>5
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'halfWidth' as const
+<l>63
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'halfDepth' as const
+<l>64
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'xPos' as const
+<l>69
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'zPos' as const
+<l>70
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'topLeft' as const
+<l>86
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'topRight' as const
+<l>87
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bottomLeft' as const
+<l>88
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'bottomRight' as const
+<l>89
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>OPT-33
+<b>Returned value from function 'createPlane' is passed by value
+<l>57
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'halfHeight' as const
+<l>111
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'y' as const
+<l>115
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'v' as const
+<l>116
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>119
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>120
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>121
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>150
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>151
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>152
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>171
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>172
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>173
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>OPT-33
+<b>Returned value from function 'createCylinder' is passed by value
+<l>106
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'halfHeight' as const
+<l>195
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'slope' as const
+<l>198
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'normalY' as const
+<l>199
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'normalXZ' as const
+<l>200
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'y' as const
+<l>204
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'radius' as const
+<l>205
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'v' as const
+<l>206
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>209
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>210
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>211
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'theta' as const
+<l>241
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'cosTheta' as const
+<l>242
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sinTheta' as const
+<l>243
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.cpp
+<c>OPT-33
+<b>Returned value from function 'createCone' is passed by value
+<l>190
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>CODSTA-MCPP-23
+<b>Class 'MeshGenerator' should be final
+<l>20
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createSphere' is passed by value
+<l>34
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createPlane' is passed by value
+<l>48
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createCylinder' is passed by value
+<l>62
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\MeshGenerator.h
+<c>OPT-33
+<b>Returned value from function 'createCone' is passed by value
+<l>76
+<k>17
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'vertices' of function 'Mesh' is passed by value
+<l>24
+<k>30
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'indices' of function 'Mesh' is passed by value
+<l>24
+<k>62
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'vertices' of function 'setVertices' is passed by value
+<l>38
+<k>42
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>The parameter 'indices' of function 'setIndices' is passed by value
+<l>39
+<k>43
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMinBounds' is passed by value
+<l>33
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>OPT-14
+<b>Returned value from function 'getMaxBounds' is passed by value
+<l>34
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-MCPP-23
+<b>Class 'Mesh' should be final
+<l>21
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getVertices' returns handles to member data: 'm_vertices'
+<l>27
+<k>54
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Mesh.h
+<c>CODSTA-CPP-06
+<b>Member function 'getIndices' returns handles to member data: 'm_indices'
+<l>28
+<k>55
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getBindingDescription' is passed by value
+<l>31
+<k>44
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>OPT-33
+<b>Returned value from function 'getAttributeDescriptions' is passed by value
+<l>39
+<k>61
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-95
+<b>The 'std' namespace should not be modified
+<l>71
+<k>11
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h1' as const
+<l>74
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h2' as const
+<l>75
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h3' as const
+<l>76
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\Vertex.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'h4' as const
+<l>77
+<k>20
+<s>false
+<N>
+<f>
+<L>0

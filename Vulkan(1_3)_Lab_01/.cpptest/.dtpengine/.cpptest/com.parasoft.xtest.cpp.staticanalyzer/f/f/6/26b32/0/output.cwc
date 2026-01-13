@@ -1,0 +1,390 @@
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>OPT-03
+<b>Parameter 'format' is not used
+<l>282
+<k>68
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'it' as const
+<l>18
+<k>10
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'pixels' as const
+<l>25
+<k>14
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'imageSize' as const
+<l>32
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'index' as const
+<l>97
+<k>13
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'imageSize' as const
+<l>106
+<k>18
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'index' as const
+<l>163
+<k>13
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'idx' as const
+<l>182
+<k>20
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'n' as const
+<l>185
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>OPT-24
+<b>Function 'getTexture' is not inlined
+<l>210
+<k>48
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>OPT-33
+<b>Returned value from function 'getDescriptorInfo' is passed by value
+<l>214
+<k>39
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'commandBuffer' as const
+<l>285
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-53
+<b>Declare local variable 'commandBuffer' as const
+<l>327
+<k>21
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'beginSingleTimeCommands' should be declared as const
+<l>346
+<k>33
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'endSingleTimeCommands' should be declared as const
+<l>364
+<k>22
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'findMemoryType' should be declared as const
+<l>378
+<k>26
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'createImageView' should be declared as const
+<l>393
+<k>29
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>CODSTA-CPP-54
+<b>Member function 'createSampler' should be declared as const
+<l>413
+<k>27
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>CODSTA-MCPP-23
+<b>Class 'TextureManager' should be final
+<l>24
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>OPT-13
+<b>Members 'm_textureCache, m_textures' of class 'TextureManager' are declared in suboptimal order for memory layout
+<l>24
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>MRM-49
+<b>Class 'Texture' shall declare a copy assignment operator
+<l>29
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>MRM-49
+<b>Class 'Texture' shall declare a copy constructor
+<l>29
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>OPT-13
+<b>Members 'path' of structure 'Texture' are declared in suboptimal order for memory layout
+<l>29
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.cpp
+<c>OPT-24
+<b>Function 'getTexture' is not inlined
+<l>210
+<k>48
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\TextureManager.h
+<c>OPT-33
+<b>Returned value from function 'getDescriptorInfo' is passed by value
+<l>86
+<k>27
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-MCPP-23
+<b>Class 'DayNightCycle' should be final
+<l>19
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>OOP-27
+<b>Class 'DayNightCycle' does not have explicitly defined assignment operator
+<l>19
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>OPT-13
+<b>Members 'moonColor, skyDawn, skyDay, skyDusk, skyNight, sunColorDawn, sunColorDusk, sunColorNoon' of class 'DayNightCycle' are declared in suboptimal order for memory layout
+<l>19
+<k>7
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>OPT-13
+<b>Members 'skyColor' of structure 'LightState' are declared in suboptimal order for memory layout
+<l>29
+<k>12
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sunAngle' as const
+<l>96
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sunHeight' as const
+<l>101
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'sunHorizontal' as const
+<l>102
+<k>15
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 'heightFactor' as const
+<l>116
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 't' as const
+<l>119
+<k>23
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>OPT-33
+<b>Returned value from function 'getLightState' is passed by value
+<l>91
+<k>16
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 't' as const
+<l>163
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 't' as const
+<l>168
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 't' as const
+<l>177
+<k>19
+<s>false
+<N>
+<f>
+<L>0
+<->
+<F>C:\Users\900452\Workspace\lab-i-final-lab-RagingRey\Vulkan(1_3)_Lab_01\DayNightCycle.h
+<c>CODSTA-CPP-53
+<b>Declare local variable 't' as const
+<l>182
+<k>19
+<s>false
+<N>
+<f>
+<L>0

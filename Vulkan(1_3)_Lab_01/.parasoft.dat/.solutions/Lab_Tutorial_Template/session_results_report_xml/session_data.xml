@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ResultsSession>
+   <SessionData configName="700120 rule set 2024" configPseudoUrl="c++test.user://700120 rule set 2024" enabledAnalysis="Static" enabledHandlers="com.parasoft.xtest.checkers.api.scope.factory;com.parasoft.xtest.checkers.api.standards.factory" header="?? ??false??false??" runId="" startTime="1767558322799" tool="c++test">
+      <TestParameters cmdLn="C++test: -config c++test.user://700120 rule set 2024 "/>
+      <Authors/>
+      <Selection>
+         <Res id="Lab_Tutorial_Template/Lab_Tutorial_Template(Vulkan1_3)/Mesh.h"/>
+      </Selection>
+      <XmlDataFiles/>
+   </SessionData>
+   <Locations/>
+   <CodingStandards>
+      <TestedFilesDetails>
+         <Total name="Suppressed / Total" supp="0" total="0">
+            <Project name="Lab_Tutorial_Template(Vulkan1_3)" supp="0" total="0"/>
+         </Total>
+      </TestedFilesDetails>
+   </CodingStandards>
+</ResultsSession>

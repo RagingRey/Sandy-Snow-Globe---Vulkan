@@ -110,7 +110,7 @@ private:
                      VkMemoryPropertyFlags properties, VkImage& image,
                      VkDeviceMemory& memory);
 
-    void transitionImageLayout(VkImage image, VkFormat format,
+    void transitionImageLayout(VkImage image,
                                VkImageLayout oldLayout, VkImageLayout newLayout);
 
     void copyBufferToImage(VkBuffer buffer, VkImage image,
